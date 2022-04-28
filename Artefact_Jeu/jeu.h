@@ -1,9 +1,9 @@
 #ifndef JEU_H
 #define JEU_H
 
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "input.h"
+#include "salle.h"
 #include <Windows.h>
 
 //Constantes du Programme
@@ -24,6 +24,8 @@ class Jeu {
 
 	Input input;
 	Event event;
+
+	Salle salle;
 
 public:
 	//Proto du contructeur

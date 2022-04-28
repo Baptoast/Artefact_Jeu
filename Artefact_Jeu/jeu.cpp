@@ -1,6 +1,8 @@
 #include "jeu.h"
-Jeu::Jeu() {
 
+Jeu::Jeu() {
+    salle = Salle(1);
+    salle.LoadTextureSalle();
 }
 
 void Jeu::creationJeu() {
@@ -30,6 +32,7 @@ void Jeu::bouclePrincipale() {
     }
     window.clear(Color::Black);
 
+    salle.afficheSalle(window);
 
     window.setView(vue);
     window.display();

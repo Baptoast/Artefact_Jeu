@@ -15,17 +15,17 @@ class Perso {
 	//recupere les actions du joueur (shift pour aller plus vite)
 	Input inputPerso;
 
-	//structure utilisée dans Perso.cpp
+	//structure utilisÃ©e dans Perso.cpp
 	struct Pos { int posX, posY; };
 
 
 	//Texture du personnage (image dans un dossier)
-	Texture perso;
+	Texture texture_perso;
 	//Sprite du personnage (apparence du personnage en jeu)
 	Sprite sprite_perso;
-	//Liste des directions où peut regarder notre personnage
+	//Liste des directions oÃ¹ peut regarder notre personnage
 	enum Dir { Down, Left, Right, Up };
-	//(x, y) x = colonne d'animation (de 1 à 3) et y = ligne d'animation (choix de la liste juste au dessus)
+	//(x, y) x = colonne d'animation (de 1 Ã  3) et y = ligne d'animation (choix de la liste juste au dessus)
 	Vector2i anim;
 
 public:

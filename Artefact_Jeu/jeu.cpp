@@ -2,7 +2,22 @@
 
 Jeu::Jeu() {
     salle = Salle(1);
-    salle.LoadTextureSalle();
+    salle.loadTextureSalle();
+    sol = Sol(1);
+    sol.loadTextureSol();
+    perso = Perso(64*5,64*5);
+    
+    bdd = BaseDeDonnee();
+
+    Adversaire adversaire1 = Adversaire(64 * 10, 64 * 2);
+    Adversaire adversaire2 = Adversaire(64 * 4, 64 * 4);
+    Adversaire adversaire3 = Adversaire(64 * 10, 64 * 10);
+
+    bdd.ajoutJoueur(perso);
+    bdd.ajoutAdversaires(adversaire1, adversaire2, adversaire3);
+    
+    
+
 }
 
 void Jeu::creationJeu() {
@@ -32,7 +47,13 @@ void Jeu::bouclePrincipale() {
     }
     window.clear(Color::Black);
 
+    sol.afficheSol(window);
+    //perso.affichePerso(window);
+    bdd.affichageChosesDansVision(window);
+    //adversaire.afficheAdversaire(window);
     salle.afficheSalle(window);
+    //indicateur.afficheIndicateur(window);
+    //hud.afficheHud(window);
 
     window.setView(vue);
     window.display();

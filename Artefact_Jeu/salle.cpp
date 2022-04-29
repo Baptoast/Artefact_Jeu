@@ -39,9 +39,6 @@ void Salle::afficheSalle(RenderWindow& window) {
 		switch (mapChoisi[i/64])
 		{
 		case 0:
-			sprite_sol.setPosition(i % 960, (i / 960) * 64);
-			sprite_sol.setTextureRect(IntRect(0, 0, 64, 64));
-			window.draw(sprite_sol);
 			break;
 		case 1:
 			sprite_mur.setPosition(i % 960, (i / 960) * 64);
@@ -54,15 +51,7 @@ void Salle::afficheSalle(RenderWindow& window) {
 	}
 }
 
-void Salle::LoadTextureSalle() {
-
-	if (!texture_sol.loadFromFile("res/img/sol.png")) {
-		cout << "erreur de chargement du background" << endl;
-	}
-	else {
-		//Je charge la texture
-		sprite_sol.setTexture(texture_sol);
-	}
+void Salle::loadTextureSalle() {
 
 	if (!texture_mur.loadFromFile("res/img/mur.png")) {
 		cout << "erreur de chargement du background" << endl;

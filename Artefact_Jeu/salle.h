@@ -12,9 +12,6 @@ class Salle {
 	int numeroMap;
 	int mapChoisi[225];
 
-	Sprite sprite_sol;
-	Texture texture_sol;
-
 	Sprite sprite_mur;
 	Texture texture_mur;
 
@@ -24,7 +21,7 @@ public:
 	Salle();
 	Salle(int numMap);
 	void afficheSalle(RenderWindow& window);
-	void LoadTextureSalle();
+	void loadTextureSalle();
 
 
 private:

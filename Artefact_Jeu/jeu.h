@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include "input.h"
+#include "sol.h"
+#include "perso.h"
+#include "baseDeDonnee.h"
+#include "adversaire.h"
 #include "salle.h"
 #include <Windows.h>
 
@@ -25,6 +29,9 @@ class Jeu {
 	Input input;
 	Event event;
 
+	Sol sol;
+	Perso perso;
+	BaseDeDonnee bdd;
 	Salle salle;
 
 public:

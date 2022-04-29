@@ -1,5 +1,5 @@
-#ifndef PERSO_H
-#define PERSO_H
+#ifndef ADVERSAIRE_H
+#define ADVERSAIRE_H
 
 //include
 #include <SFML/Graphics.hpp>
@@ -11,27 +11,23 @@
 using namespace sf;
 using namespace std;
 
-class Perso {
-	//recupere les actions du joueur (shift pour aller plus vite)
-	Input inputPerso;
+class Adversaire {
 
-	//structure utilisÃ©e dans Perso.cpp
+	//structure utilisée dans Perso.cpp
 	struct Pos { int posX, posY; };
 
-	Texture texture_perso;
-	Sprite sprite_perso;
+	Texture texture_adversaire;
+	Sprite sprite_adversaire;
 
-	Texture texture_vision;
-	Sprite sprite_vision;
-	//Liste des directions oÃ¹ peut regarder notre personnage
+	//Liste des directions où peut regarder notre personnage
 	enum Dir { Down, Left, Right, Up };
-	//(x, y) x = colonne d'animation (de 1 Ã  3) et y = ligne d'animation (choix de la liste juste au dessus)
+	//(x, y) x = colonne d'animation (de 1 à 3) et y = ligne d'animation (choix de la liste juste au dessus)
 	Vector2i anim;
 
 public:
 	//Proto du contructeur
-	Perso();
-	Perso(int x, int y);
+	Adversaire();
+	Adversaire(int x, int y);
 
 	//Setter
 	void setInput(Input input);
@@ -43,17 +39,16 @@ public:
 	Sprite getSprite();
 
 	//fontion
-	void loadTexturePerso();
+	void loadTextureAdversaire();
 	float anglePoints(int x1, int y1, int x2, int y2);
 	float anglePointsDegree(int x1, int y1, int x2, int y2);
 
-	void affichePerso(RenderWindow& window);
+	void afficheAdversaire(RenderWindow& window);
 
 
 
 	//attribut private
 private:
-	Pos posJoueur;
+	Pos posAdversaire;
 };
 #endif
-

@@ -157,6 +157,8 @@
   <ItemGroup>
     <ClCompile Include="adversaire.cpp" />
     <ClCompile Include="baseDeDonnee.cpp" />
+    <ClCompile Include="hud.cpp" />
+    <ClCompile Include="indicateur.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="jeu.cpp" />
     <ClCompile Include="main.cpp" />
@@ -167,6 +169,8 @@
   <ItemGroup>
     <ClInclude Include="adversaire.h" />
     <ClInclude Include="baseDeDonnee.h" />
+    <ClInclude Include="hud.h" />
+    <ClInclude Include="indicateur.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="jeu.h" />
     <ClInclude Include="main.h" />

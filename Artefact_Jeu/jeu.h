@@ -8,6 +8,8 @@
 #include "baseDeDonnee.h"
 #include "adversaire.h"
 #include "salle.h"
+#include "indicateur.h"
+#include "hud.h"
 #include <Windows.h>
 
 //Constantes du Programme
@@ -22,6 +24,7 @@ using namespace std;
 class Jeu {
 	View vue = View();
 	Clock clk;
+	Mouse laSouris;
 
 	RenderWindow window;
 	Font font;
@@ -33,6 +36,10 @@ class Jeu {
 	Perso perso;
 	BaseDeDonnee bdd;
 	Salle salle;
+	Indicateur indicateur;
+	Hud hud;
+
+	int nbrClick = 0;
 
 public:
 	//Proto du contructeur
@@ -45,7 +52,7 @@ public:
 	//fonction
 	void creationJeu();
 	void bouclePrincipale();
-
+	void deroulementTour();
 	bool isOpen();
 
 private:

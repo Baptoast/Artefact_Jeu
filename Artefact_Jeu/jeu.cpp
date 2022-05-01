@@ -5,18 +5,19 @@ Jeu::Jeu() {
     salle.loadTextureSalle();
     sol = Sol(1);
     sol.loadTextureSol();
-    perso = Perso(64*5,64*5);
+    perso = Perso(64*3,64*3);
     
     bdd = BaseDeDonnee();
 
-    Adversaire adversaire1 = Adversaire(64 * 10, 64 * 2);
-    Adversaire adversaire2 = Adversaire(64 * 4, 64 * 4);
-    Adversaire adversaire3 = Adversaire(64 * 10, 64 * 10);
+    Adversaire adversaire1 = Adversaire(64 * 3, 64 * 11);
+    Adversaire adversaire2 = Adversaire(64 * 11, 64 * 3);
+    Adversaire adversaire3 = Adversaire(64 * 11, 64 * 11);
 
     bdd.ajoutJoueur(perso);
     bdd.ajoutAdversaires(adversaire1, adversaire2, adversaire3);
-    
-    
+
+    indicateur.loadTextureIndicateur();
+    hud.loadTextureHud(window);
 
 }
 
@@ -41,23 +42,33 @@ bool Jeu::isOpen() {
 void Jeu::bouclePrincipale() {
 
     //fonction qui capte si un bouton est appuyé (avant il y avait un while).
+    /*
     if (window.pollEvent(event)) {
         input.InputHandler(event, window);
-        //joueur.setInput(input);
-    }
+    }*/
     window.clear(Color::Black);
 
     sol.afficheSol(window);
-    //perso.affichePerso(window);
     bdd.affichageChosesDansVision(window);
-    //adversaire.afficheAdversaire(window);
     salle.afficheSalle(window);
-    //indicateur.afficheIndicateur(window);
-    //hud.afficheHud(window);
+    deroulementTour(); //et affichage indicateur
+    hud.afficheHud(window);
 
     window.setView(vue);
     window.display();
 
+}
+
+void Jeu::deroulementTour() {
+    if (!hud.menuAction) {
+        hud.hud_Actif = true;
+        if (hud.actionDeplacement) {
+            indicateur.afficheIndicateur(window,1,perso.getPos().posX + nbrClick*64,perso.getPos().posY);
+            if (laSouris.isButtonPressed(laSouris.Left) && indicateur.casePossible(window)) {
+                nbrClick += 1; //RENDU ICI
+            }
+        }
+    }
 }
 
 

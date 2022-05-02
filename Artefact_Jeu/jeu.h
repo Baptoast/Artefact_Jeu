@@ -11,12 +11,11 @@
 #include "indicateur.h"
 #include "hud.h"
 #include <Windows.h>
+#include <vector>
 
 //Constantes du Programme
 const int SCREEN_SIZE_WEIGHT = 960;
 const int SCREEN_SIZE_HEIGHT = 960;
-
-
 
 using namespace sf;
 using namespace std;
@@ -39,7 +38,13 @@ class Jeu {
 	Indicateur indicateur;
 	Hud hud;
 
-	int nbrClick = 0;
+	struct Case { int posX, posY; };
+	vector<Case> listeCase;
+	bool initialisationPremiereCase = false;
+	bool attenteCaseSuivante = false;
+	bool confirmation = false;
+
+	int choix = 0;
 
 public:
 	//Proto du contructeur
@@ -54,6 +59,7 @@ public:
 	void bouclePrincipale();
 	void deroulementTour();
 	bool isOpen();
+	bool attenteDesAutresJoueurs();
 
 private:
 	void loadFont();

@@ -19,16 +19,18 @@ class Perso {
 	struct Pos { int posX, posY; };
 
 	Texture texture_perso;
-	Sprite sprite_perso;
-
 	Texture texture_vision;
-	Sprite sprite_vision;
+	
 	//Liste des directions où peut regarder notre personnage
 	enum Dir { Down, Left, Right, Up };
 	//(x, y) x = colonne d'animation (de 1 à 3) et y = ligne d'animation (choix de la liste juste au dessus)
 	Vector2i anim;
 
 public:
+	int numeroDeFile = 1;
+	Sprite sprite_perso;
+	Sprite sprite_vision;
+
 	//Proto du contructeur
 	Perso();
 	Perso(int x, int y);

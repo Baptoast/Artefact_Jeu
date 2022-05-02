@@ -10,6 +10,13 @@ void BaseDeDonnee::ajoutJoueur(Perso& perso) {
 	leJoueur.at(0).loadTexturePerso();
 }
 
+void BaseDeDonnee::updateJoueur(int x, int y) {
+	leJoueur.at(0).setPosX(x);
+	leJoueur.at(0).setPosY(y);
+	leJoueur.at(0).sprite_perso.setPosition(x,y);
+	leJoueur.at(0).sprite_vision.setPosition(x - 175 + 32, y - 175 + 32);
+}
+
 void BaseDeDonnee::ajoutAdversaires(Adversaire& adv1, Adversaire& adv2, Adversaire& adv3) {
 	listeAdversaire.push_back(adv1);
 	listeAdversaire.push_back(adv2);

@@ -19,10 +19,12 @@ class Indicateur {
 	Sprite sprite_indicateur_impossible;
 	Texture texture_indicateur_impossible;
 
-	vector<Sprite> listeCasePossible;
+	
 
 
 public:
+	vector<Sprite> listeCasePossible;
+
 	//Proto du contructeur
 	Indicateur();
 	void afficheIndicateur(RenderWindow& window, int numType, int posJoueurX, int posJoueurY);

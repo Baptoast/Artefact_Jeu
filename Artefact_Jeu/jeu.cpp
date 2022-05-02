@@ -60,15 +60,75 @@ void Jeu::bouclePrincipale() {
 }
 
 void Jeu::deroulementTour() {
+    int positionSourisX = laSouris.getPosition().x - window.getPosition().x;
+    int positionSourisY = laSouris.getPosition().y - window.getPosition().y;
     if (!hud.menuAction) {
         hud.hud_Actif = true;
         if (hud.actionDeplacement) {
-            indicateur.afficheIndicateur(window,1,perso.getPos().posX + nbrClick*64,perso.getPos().posY);
-            if (laSouris.isButtonPressed(laSouris.Left) && indicateur.casePossible(window)) {
-                nbrClick += 1; //RENDU ICI
+            if (listeCase.size() <= 3) {
+                if (!initialisationPremiereCase) {
+                    Case posJoueurActuel;
+                    posJoueurActuel.posX = bdd.leJoueur.at(0).getPos().posX;
+                    posJoueurActuel.posY = bdd.leJoueur.at(0).getPos().posY;
+                    listeCase.push_back(posJoueurActuel);
+                    initialisationPremiereCase = true;
+                }
+                indicateur.afficheIndicateur(window, 1, listeCase.at(listeCase.size() - 1).posX, listeCase.at(listeCase.size() - 1).posY);
+                if (laSouris.isButtonPressed(laSouris.Left) && indicateur.casePossible(window) && !attenteCaseSuivante) {
+                    Case caseSuivante;
+                    caseSuivante.posX = (positionSourisX / 64) * 64;
+                    caseSuivante.posY = (positionSourisY / 64) * 64;
+                    listeCase.push_back(caseSuivante);
+                    indicateur.listeCasePossible.clear();
+                    attenteCaseSuivante = true;
+                }
+                else if (attenteCaseSuivante && !laSouris.isButtonPressed(laSouris.Left)) attenteCaseSuivante = false;
+            }
+            else {
+                if (confirmation && !hud.confirmationChoix) {
+                    //ICI ON PASSE EN ATTENTE
+                    cout << "c'est confirmer, on attend maintenant" << endl;
+                    initialisationPremiereCase = false;
+                    attenteCaseSuivante = false;
+                    confirmation = false;
+                    hud.actionDeplacement = false;
+                    choix = 1;
+                }
+                else if (confirmation && hud.confirmationChoix) {
+                    hud.confirmationBouton(window);
+                }
+                else if (!confirmation && !hud.confirmationChoix) {
+                    hud.confirmationChoix = true;
+                    hud.confirmationBouton(window);
+                    confirmation = true;
+                }
+            }
+            
+        }
+        if (!attenteDesAutresJoueurs()) {
+            //A METTRE DANS UNE FONCTION SPECIALE DE RESOLUTION D'ACTION !!
+            if (perso.numeroDeFile == 1) {
+                //Deplacement
+                if (choix == 1) {
+                    for (int i = 0; i < listeCase.size(); i++) {
+                        bdd.updateJoueur(listeCase.at(i).posX, listeCase.at(i).posY);
+                    }
+                    hud.menuAction = true;
+                    hud.hud_Actif = false;
+                    listeCase.clear();
+                    choix = 0;
+                }
             }
         }
     }
+}
+
+//Attend que tout le monde (y compris nous) aies choisi
+bool Jeu::attenteDesAutresJoueurs() {
+    if (choix != 0) { //&& que les autres joueurs ont choisi
+        return false;
+    }
+    return true;
 }
 
 

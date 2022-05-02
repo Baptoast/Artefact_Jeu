@@ -30,6 +30,10 @@ void Hud::afficheHud(RenderWindow& window) {
 		window.draw(sprite_hexaObjets);
 		window.draw(sprite_hexaEboulement);
 	}
+	if (confirmationChoix) {
+		sprite_confirmation.setPosition(30, 700);
+		window.draw(sprite_confirmation);
+	}
 }
 
 void Hud::menuActionReaction(RenderWindow& window) {
@@ -55,6 +59,16 @@ void Hud::menuActionReaction(RenderWindow& window) {
 		cout << "clique declenchement eboulement" << endl;
 		actionEboulement = true;
 		menuAction = false;
+	}
+}
+
+void Hud::confirmationBouton(RenderWindow& window) {
+	int positionSourisX = laSouris.getPosition().x - window.getPosition().x;
+	int positionSourisY = laSouris.getPosition().y - window.getPosition().y;
+
+	if (sprite_confirmation.getGlobalBounds().contains(positionSourisX, positionSourisY) && laSouris.isButtonPressed(laSouris.Left)) {
+		cout << "confirmation" << endl;
+		confirmationChoix = false;
 	}
 }
 
@@ -114,7 +128,7 @@ void Hud::loadTextureHud(RenderWindow& window) {
 			vieJoueur.at(i).setPosition(8, 200+i*60);
 		}
 	}
-	if (!texture_conteneurActions.loadFromFile("res/img/conteneurActions.png") || !texture_hexaDeplacement.loadFromFile("res/img/hexaDeplacement.png") || !texture_hexaEboulement.loadFromFile("res/img/hexaEboulement.png") || !texture_hexaObjets.loadFromFile("res/img/hexaObjets.png") || !texture_hexaFouille.loadFromFile("res/img/hexaFouille.png")) {
+	if (!texture_conteneurActions.loadFromFile("res/img/conteneurActions.png") || !texture_hexaDeplacement.loadFromFile("res/img/hexaDeplacement.png") || !texture_hexaEboulement.loadFromFile("res/img/hexaEboulement.png") || !texture_hexaObjets.loadFromFile("res/img/hexaObjets.png") || !texture_hexaFouille.loadFromFile("res/img/hexaFouille.png") || !texture_confirmation.loadFromFile("res/img/confirmation.png")) {
 		cout << "erreur de chargement du background" << endl;
 	}
 	else {
@@ -123,6 +137,7 @@ void Hud::loadTextureHud(RenderWindow& window) {
 		sprite_hexaFouille.setTexture(texture_hexaFouille);
 		sprite_hexaObjets.setTexture(texture_hexaObjets);
 		sprite_hexaEboulement.setTexture(texture_hexaEboulement);
+		sprite_confirmation.setTexture(texture_confirmation);
 
 		sprite_conteneurActions.setPosition(30,320);
 		sprite_hexaDeplacement.setPosition(50, 360);

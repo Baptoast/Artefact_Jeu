@@ -37,6 +37,8 @@ class Hud {
 	Texture texture_hexaObjets;
 	Sprite sprite_hexaEboulement;
 	Texture texture_hexaEboulement;
+	Sprite sprite_confirmation;
+	Texture texture_confirmation;
 
 public:
 	//Proto du contructeur
@@ -44,12 +46,14 @@ public:
 	void afficheHud(RenderWindow& window);
 	void loadTextureHud(RenderWindow& window);
 	void menuActionReaction(RenderWindow& window);
+	void confirmationBouton(RenderWindow& window);
 	bool hud_Actif = false;
 	bool menuAction = true;
 	bool actionDeplacement = false;
 	bool actionFouille = false;
 	bool actionObjets = false;
 	bool actionEboulement = false;
+	bool confirmationChoix = false;
 
 private:
 

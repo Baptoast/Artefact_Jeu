@@ -10,6 +10,7 @@
 #include "salle.h"
 #include "indicateur.h"
 #include "hud.h"
+#include "objet.h"
 #include <Windows.h>
 #include <vector>
 
@@ -37,6 +38,8 @@ class Jeu {
 	Salle salle;
 	Indicateur indicateur;
 	Hud hud;
+
+	Objet objets;
 
 	struct Case { int posX, posY; };
 	vector<Case> listeCase;

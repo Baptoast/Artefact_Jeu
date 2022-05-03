@@ -5,9 +5,10 @@ BaseDeDonnee::BaseDeDonnee() {
 
 };
 
-void BaseDeDonnee::ajoutJoueur(Perso& perso) {
+void BaseDeDonnee::ajoutJoueur(Perso& perso, String personnageChoisi) {
 	leJoueur.push_back(perso);
 	leJoueur.at(0).loadTexturePerso();
+	leJoueur.at(0).loadTexturePersoPortrait(personnageChoisi);
 }
 
 void BaseDeDonnee::updateJoueur(int x, int y) {

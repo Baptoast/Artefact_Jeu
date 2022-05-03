@@ -12,14 +12,13 @@ using namespace sf;
 using namespace std;
 
 class Perso {
-	//recupere les actions du joueur (shift pour aller plus vite)
-	Input inputPerso;
 
 	//structure utilisée dans Perso.cpp
 	struct Pos { int posX, posY; };
 
 	Texture texture_perso;
 	Texture texture_vision;
+	Texture texture_portrait;
 	
 	//Liste des directions où peut regarder notre personnage
 	enum Dir { Down, Left, Right, Up };
@@ -27,9 +26,11 @@ class Perso {
 	Vector2i anim;
 
 public:
+	int pv;
 	int numeroDeFile = 1;
 	Sprite sprite_perso;
 	Sprite sprite_vision;
+	Sprite sprite_portrait;
 
 	//Proto du contructeur
 	Perso();
@@ -48,6 +49,7 @@ public:
 	void loadTexturePerso();
 	float anglePoints(int x1, int y1, int x2, int y2);
 	float anglePointsDegree(int x1, int y1, int x2, int y2);
+	void loadTexturePersoPortrait(String personnageChoisi);
 
 	void affichePerso(RenderWindow& window);
 

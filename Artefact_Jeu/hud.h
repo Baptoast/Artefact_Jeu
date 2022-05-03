@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include "objet.h"
 
 using namespace sf;
 using namespace std;
@@ -43,7 +44,7 @@ class Hud {
 public:
 	//Proto du contructeur
 	Hud();
-	void afficheHud(RenderWindow& window);
+	void afficheHud(RenderWindow& window, Objet& objets);
 	void loadTextureHud(RenderWindow& window);
 	void menuActionReaction(RenderWindow& window);
 	void confirmationBouton(RenderWindow& window);
@@ -54,6 +55,7 @@ public:
 	bool actionObjets = false;
 	bool actionEboulement = false;
 	bool confirmationChoix = false;
+	bool inventaireGros = false;
 
 private:
 

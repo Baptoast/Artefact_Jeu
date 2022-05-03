@@ -4,15 +4,19 @@ Hud::Hud() {
 
 }
 
-void Hud::afficheHud(RenderWindow& window) {
+void Hud::afficheHud(RenderWindow& window, Objet& objets) {
 
 	if (hud_Actif) {
-		sprite_inventaire.setPosition(window.getPosition().x - 140, window.getPosition().y + ((window.getSize().y / 100) * 87));
+		if (!inventaireGros) {
+			sprite_inventaire.setScale(Vector2f(1, 1));
+			sprite_inventaire.setPosition(window.getPosition().x - 140, window.getPosition().y + ((window.getSize().y / 100) * 87));
+			window.draw(sprite_inventaire);
+			objets.afficheObjets(window, false);
+		}
 		sprite_bulleEmote.setPosition(window.getPosition().x - 400, window.getPosition().y + ((window.getSize().y / 100) * 88));
 		sprite_ordreJoueurs.setPosition(window.getPosition().x + 400, window.getPosition().y + ((window.getSize().y / 100) * 30));
 		sprite_tempsTour.setPosition(window.getPosition().x - 450, window.getPosition().y - 25);
 
-		window.draw(sprite_inventaire);
 		window.draw(sprite_bulleEmote);
 		window.draw(sprite_ordreJoueurs);
 		window.draw(sprite_tempsTour);
@@ -33,6 +37,12 @@ void Hud::afficheHud(RenderWindow& window) {
 	if (confirmationChoix) {
 		sprite_confirmation.setPosition(30, 700);
 		window.draw(sprite_confirmation);
+	}
+	if (inventaireGros) {
+		sprite_inventaire.setPosition(window.getPosition().x - 280, window.getPosition().y + ((window.getSize().y / 100) * 50));
+		sprite_inventaire.setScale(Vector2f(2,2));
+		window.draw(sprite_inventaire);
+		objets.afficheObjets(window,true);
 	}
 }
 

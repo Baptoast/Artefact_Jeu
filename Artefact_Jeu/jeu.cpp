@@ -6,6 +6,8 @@ Jeu::Jeu() {
     sol = Sol(1);
     sol.loadTextureSol();
     perso = Perso(64*3,64*3);
+    objets = Objet();
+    objets.loadTextureObjets();
     
     bdd = BaseDeDonnee();
 
@@ -13,7 +15,7 @@ Jeu::Jeu() {
     Adversaire adversaire2 = Adversaire(64 * 11, 64 * 3);
     Adversaire adversaire3 = Adversaire(64 * 11, 64 * 11);
 
-    bdd.ajoutJoueur(perso);
+    bdd.ajoutJoueur(perso,"Jon");
     bdd.ajoutAdversaires(adversaire1, adversaire2, adversaire3);
 
     indicateur.loadTextureIndicateur();
@@ -52,7 +54,7 @@ void Jeu::bouclePrincipale() {
     bdd.affichageChosesDansVision(window);
     salle.afficheSalle(window);
     deroulementTour(); //et affichage indicateur
-    hud.afficheHud(window);
+    hud.afficheHud(window,objets);
 
     window.setView(vue);
     window.display();
@@ -105,6 +107,60 @@ void Jeu::deroulementTour() {
             }
             
         }
+        if (hud.actionFouille) {
+            if (confirmation && !hud.confirmationChoix) {
+                //ICI ON PASSE EN ATTENTE
+                cout << "c'est confirmer, on attend maintenant" << endl;
+                confirmation = false;
+                hud.actionFouille = false;
+                choix = 2;
+            }
+            else if (confirmation && hud.confirmationChoix) {
+                hud.confirmationBouton(window);
+            }
+            else if (!confirmation && !hud.confirmationChoix) {
+                hud.confirmationChoix = true;
+                hud.confirmationBouton(window);
+                confirmation = true;
+            }
+        }
+        if (hud.actionObjets) {
+            hud.inventaireGros = true;
+            if (objets.numChoisi !=-1) {
+                if (listeCase.size() <= 0) {
+                    indicateur.afficheIndicateur(window, objets.numeroIndicateurObjetUtilisation(objets.numChoisi), bdd.leJoueur.at(0).getPos().posX, bdd.leJoueur.at(0).getPos().posY);
+                    if (laSouris.isButtonPressed(laSouris.Left) && indicateur.casePossible(window) && !attenteCaseSuivante) {
+                        Case caseSuivante;
+                        caseSuivante.posX = (positionSourisX / 64) * 64;
+                        caseSuivante.posY = (positionSourisY / 64) * 64;
+                        listeCase.push_back(caseSuivante);
+                        indicateur.listeCasePossible.clear();
+                        attenteCaseSuivante = true;
+                    }
+                    else if (attenteCaseSuivante && !laSouris.isButtonPressed(laSouris.Left)) attenteCaseSuivante = false;
+                }
+                else {
+                    if (confirmation && !hud.confirmationChoix) {
+                        //ICI ON PASSE EN ATTENTE
+                        cout << "c'est confirmer, on attend maintenant" << endl;
+                        confirmation = false;
+                        hud.actionObjets = false;
+                        hud.inventaireGros = false;
+                        attenteCaseSuivante = false;
+                        choix = 3;
+                    }
+                    else if (confirmation && hud.confirmationChoix) {
+                        hud.confirmationBouton(window);
+                    }
+                    else if (!confirmation && !hud.confirmationChoix) {
+                        hud.confirmationChoix = true;
+                        hud.confirmationBouton(window);
+                        confirmation = true;
+
+                    }
+                }
+            }
+        }
         if (!attenteDesAutresJoueurs()) {
             //A METTRE DANS UNE FONCTION SPECIALE DE RESOLUTION D'ACTION !!
             if (perso.numeroDeFile == 1) {
@@ -113,11 +169,23 @@ void Jeu::deroulementTour() {
                     for (int i = 0; i < listeCase.size(); i++) {
                         bdd.updateJoueur(listeCase.at(i).posX, listeCase.at(i).posY);
                     }
-                    hud.menuAction = true;
-                    hud.hud_Actif = false;
-                    listeCase.clear();
-                    choix = 0;
                 }
+                //Fouilles
+                else if (choix == 2) {
+                    objets.gainObjet(0);
+
+                }
+                //Utilisation d'un Objet
+                else if (choix == 3) {
+                    objets.effetObjet(objets.numChoisi, bdd.leJoueur, listeCase.at(0).posX, listeCase.at(0).posY);
+                    objets.inventairePerso.erase(objets.inventairePerso.begin() + objets.numChoisiParRapportAInventaire);
+                    objets.numChoisiParRapportAInventaire = -1;
+                    objets.numChoisi = -1;
+                }
+                hud.menuAction = true;
+                hud.hud_Actif = false;
+                listeCase.clear();
+                choix = 0;
             }
         }
     }

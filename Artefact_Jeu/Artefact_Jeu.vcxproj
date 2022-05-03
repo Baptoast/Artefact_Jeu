@@ -162,6 +162,7 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="jeu.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="objet.cpp" />
     <ClCompile Include="perso.cpp" />
     <ClCompile Include="salle.cpp" />
     <ClCompile Include="sol.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="input.h" />
     <ClInclude Include="jeu.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="objet.h" />
     <ClInclude Include="perso.h" />
     <ClInclude Include="salle.h" />
     <ClInclude Include="sol.h" />

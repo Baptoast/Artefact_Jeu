@@ -22,7 +22,7 @@ public:
 
 	bool dansChampDeVision(int x, int y);
 	void affichageChosesDansVision(RenderWindow& window);
-	void ajoutJoueur(Perso& perso);
+	void ajoutJoueur(Perso& perso, String personnageChoisi);
 	void updateJoueur(int x, int y);
 	void ajoutAdversaires(Adversaire& adv1, Adversaire& adv2, Adversaire& adv3);
 

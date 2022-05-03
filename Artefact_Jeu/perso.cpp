@@ -11,6 +11,7 @@ Perso::Perso(int x, int y) {
     setPosY(y);
 	sprite_perso.setPosition(posJoueur.posX,posJoueur.posY);
 	sprite_vision.setPosition(posJoueur.posX-175+32, posJoueur.posY - 175+32);
+	pv = 4;
 }
 
 //Getter
@@ -42,6 +43,16 @@ void Perso::loadTexturePerso() {
 	else {
 		//Je charge la texture
 		sprite_vision.setTexture(texture_vision);
+	}
+};
+
+void Perso::loadTexturePersoPortrait(String personnageChoisi) {
+	if (!texture_portrait.loadFromFile("res/img/portrait/"+ personnageChoisi +".png")) {
+		cout << "erreur de chargement du personnage" << endl;
+	}
+	else {
+		//Je charge la texture
+		sprite_portrait.setTexture(texture_portrait);
 	}
 };
 

@@ -18,6 +18,8 @@ class Adversaire {
 
 	Texture texture_adversaire;
 	Sprite sprite_adversaire;
+	Texture texture_portrait;
+	
 
 	//Liste des directions où peut regarder notre personnage
 	enum Dir { Down, Left, Right, Up };
@@ -25,6 +27,11 @@ class Adversaire {
 	Vector2i anim;
 
 public:
+	Sprite sprite_portrait;
+	int numeroDeFile = -1;
+	struct Case { int posX, posY; };
+	vector<Case> listeCase; //RENDU ICI !!!
+
 	//Proto du contructeur
 	Adversaire();
 	Adversaire(int x, int y);
@@ -40,8 +47,11 @@ public:
 
 	//fontion
 	void loadTextureAdversaire();
+	void loadTextureAdversairePortrait(String personnageChoisi);
 	float anglePoints(int x1, int y1, int x2, int y2);
 	float anglePointsDegree(int x1, int y1, int x2, int y2);
+
+	void choixDeSesActions();
 
 	void afficheAdversaire(RenderWindow& window);
 

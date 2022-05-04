@@ -4,7 +4,7 @@ Hud::Hud() {
 
 }
 
-void Hud::afficheHud(RenderWindow& window, Objet& objets) {
+void Hud::afficheHud(RenderWindow& window, Objet& objets, vector<Perso>& leJoueur, vector<Adversaire>& adversaires) {
 
 	if (hud_Actif) {
 		if (!inventaireGros) {
@@ -13,6 +13,14 @@ void Hud::afficheHud(RenderWindow& window, Objet& objets) {
 			window.draw(sprite_inventaire);
 			objets.afficheObjets(window, false);
 		}
+
+		leJoueur.at(0).sprite_portrait.setPosition(calculDistanceOrdreJoueursX(leJoueur.at(0).numeroDeFile,window), calculDistanceOrdreJoueursY(leJoueur.at(0).numeroDeFile, window));
+		for (Adversaire var : adversaires) {
+			var.sprite_portrait.setPosition(calculDistanceOrdreJoueursX(var.numeroDeFile, window), calculDistanceOrdreJoueursY(var.numeroDeFile, window));
+			window.draw(var.sprite_portrait);
+		}
+		window.draw(leJoueur.at(0).sprite_portrait);
+
 		sprite_bulleEmote.setPosition(window.getPosition().x - 400, window.getPosition().y + ((window.getSize().y / 100) * 88));
 		sprite_ordreJoueurs.setPosition(window.getPosition().x + 400, window.getPosition().y + ((window.getSize().y / 100) * 30));
 		sprite_tempsTour.setPosition(window.getPosition().x - 450, window.getPosition().y - 25);
@@ -44,6 +52,44 @@ void Hud::afficheHud(RenderWindow& window, Objet& objets) {
 		window.draw(sprite_inventaire);
 		objets.afficheObjets(window,true);
 	}
+}
+
+int Hud::calculDistanceOrdreJoueursX(int num, RenderWindow& window) {
+	switch (num)
+	{
+	case 0:
+		return window.getPosition().x + 400 + 3;
+		break;
+	case 1:
+		return window.getPosition().x + 400 + 6;
+		break;
+	case 2:
+		return window.getPosition().x + 400 + 6;
+		break;
+	case 3:
+		return window.getPosition().x + 400 + 6;
+		break;
+	}
+	return 0;
+}
+
+int Hud::calculDistanceOrdreJoueursY(int num, RenderWindow& window) {
+	switch (num)
+	{
+	case 0:
+		return window.getPosition().y + ((window.getSize().y / 100) * 30) + 3;
+		break;
+	case 1:
+		return window.getPosition().y + ((window.getSize().y / 100) * 38);
+		break;
+	case 2:
+		return window.getPosition().y + ((window.getSize().y / 100) * 44);
+		break;
+	case 3:
+		return  window.getPosition().y + ((window.getSize().y / 100) * 52);
+		break;
+	}
+	return 0;
 }
 
 void Hud::menuActionReaction(RenderWindow& window) {

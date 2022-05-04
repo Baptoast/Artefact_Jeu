@@ -47,8 +47,6 @@ class Jeu {
 	bool attenteCaseSuivante = false;
 	bool confirmation = false;
 
-	int choix = 0;
-
 public:
 	//Proto du contructeur
 	Jeu();
@@ -62,7 +60,6 @@ public:
 	void bouclePrincipale();
 	void deroulementTour();
 	bool isOpen();
-	bool attenteDesAutresJoueurs();
 
 private:
 	void loadFont();

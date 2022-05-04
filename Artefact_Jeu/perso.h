@@ -27,7 +27,9 @@ class Perso {
 
 public:
 	int pv;
-	int numeroDeFile = 1;
+
+	int choix = 0;
+	int numeroDeFile = -1;
 	Sprite sprite_perso;
 	Sprite sprite_vision;
 	Sprite sprite_portrait;

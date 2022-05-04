@@ -16,10 +16,12 @@ Jeu::Jeu() {
     Adversaire adversaire3 = Adversaire(64 * 11, 64 * 11);
 
     bdd.ajoutJoueur(perso,"Jon");
-    bdd.ajoutAdversaires(adversaire1, adversaire2, adversaire3);
+    bdd.ajoutAdversaires(adversaire1, adversaire2, adversaire3,"Helene", "Helene", "Helene");
 
     indicateur.loadTextureIndicateur();
     hud.loadTextureHud(window);
+
+    bdd.melangeOrdreDePassage();
 
 }
 
@@ -54,7 +56,7 @@ void Jeu::bouclePrincipale() {
     bdd.affichageChosesDansVision(window);
     salle.afficheSalle(window);
     deroulementTour(); //et affichage indicateur
-    hud.afficheHud(window,objets);
+    hud.afficheHud(window,objets,bdd.leJoueur,bdd.listeAdversaire);
 
     window.setView(vue);
     window.display();
@@ -94,7 +96,7 @@ void Jeu::deroulementTour() {
                     attenteCaseSuivante = false;
                     confirmation = false;
                     hud.actionDeplacement = false;
-                    choix = 1;
+                    bdd.leJoueur.at(0).choix = 1;
                 }
                 else if (confirmation && hud.confirmationChoix) {
                     hud.confirmationBouton(window);
@@ -113,7 +115,7 @@ void Jeu::deroulementTour() {
                 cout << "c'est confirmer, on attend maintenant" << endl;
                 confirmation = false;
                 hud.actionFouille = false;
-                choix = 2;
+                bdd.leJoueur.at(0).choix = 2;
             }
             else if (confirmation && hud.confirmationChoix) {
                 hud.confirmationBouton(window);
@@ -147,7 +149,7 @@ void Jeu::deroulementTour() {
                         hud.actionObjets = false;
                         hud.inventaireGros = false;
                         attenteCaseSuivante = false;
-                        choix = 3;
+                        bdd.leJoueur.at(0).choix = 3;
                     }
                     else if (confirmation && hud.confirmationChoix) {
                         hud.confirmationBouton(window);
@@ -161,22 +163,22 @@ void Jeu::deroulementTour() {
                 }
             }
         }
-        if (!attenteDesAutresJoueurs()) {
+        if (!bdd.attenteDesAutresJoueurs()) {
             //A METTRE DANS UNE FONCTION SPECIALE DE RESOLUTION D'ACTION !!
-            if (perso.numeroDeFile == 1) {
+            //if (bdd.leJoueur.at(0).numeroDeFile == 1) {
                 //Deplacement
-                if (choix == 1) {
+                if (bdd.leJoueur.at(0).choix == 1) {
                     for (int i = 0; i < listeCase.size(); i++) {
                         bdd.updateJoueur(listeCase.at(i).posX, listeCase.at(i).posY);
                     }
                 }
                 //Fouilles
-                else if (choix == 2) {
+                else if (bdd.leJoueur.at(0).choix == 2) {
                     objets.gainObjet(0);
 
                 }
                 //Utilisation d'un Objet
-                else if (choix == 3) {
+                else if (bdd.leJoueur.at(0).choix == 3) {
                     objets.effetObjet(objets.numChoisi, bdd.leJoueur, listeCase.at(0).posX, listeCase.at(0).posY);
                     objets.inventairePerso.erase(objets.inventairePerso.begin() + objets.numChoisiParRapportAInventaire);
                     objets.numChoisiParRapportAInventaire = -1;
@@ -185,18 +187,13 @@ void Jeu::deroulementTour() {
                 hud.menuAction = true;
                 hud.hud_Actif = false;
                 listeCase.clear();
-                choix = 0;
-            }
+                bdd.leJoueur.at(0).choix = 0;
+                bdd.melangeOrdreDePassage();
+            //}
         }
     }
 }
 
-//Attend que tout le monde (y compris nous) aies choisi
-bool Jeu::attenteDesAutresJoueurs() {
-    if (choix != 0) { //&& que les autres joueurs ont choisi
-        return false;
-    }
-    return true;
-}
+
 
 

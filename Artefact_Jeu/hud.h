@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 #include "objet.h"
+#include "perso.h"
+#include "adversaire.h"
 
 using namespace sf;
 using namespace std;
@@ -44,10 +46,12 @@ class Hud {
 public:
 	//Proto du contructeur
 	Hud();
-	void afficheHud(RenderWindow& window, Objet& objets);
+	void afficheHud(RenderWindow& window, Objet& objets, vector<Perso>& leJoueur, vector<Adversaire>& adversaires);
 	void loadTextureHud(RenderWindow& window);
 	void menuActionReaction(RenderWindow& window);
 	void confirmationBouton(RenderWindow& window);
+	int calculDistanceOrdreJoueursX(int num, RenderWindow& window);
+	int calculDistanceOrdreJoueursY(int num, RenderWindow& window);
 	bool hud_Actif = false;
 	bool menuAction = true;
 	bool actionDeplacement = false;

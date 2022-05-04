@@ -37,10 +37,24 @@ void Adversaire::loadTextureAdversaire() {
 	}
 };
 
+void Adversaire::loadTextureAdversairePortrait(String personnageChoisi) {
+	if (!texture_portrait.loadFromFile("res/img/portrait/" + personnageChoisi + ".png")) {
+		cout << "erreur de chargement du personnage" << endl;
+	}
+	else {
+		//Je charge la texture
+		sprite_portrait.setTexture(texture_portrait);
+	}
+};
+
 void Adversaire::afficheAdversaire(RenderWindow& window) {
 
 	sprite_adversaire.setTextureRect(IntRect(0, 0, 64, 64));
 
 	window.draw(sprite_adversaire);
+
+}
+
+void Adversaire::choixDeSesActions() {
 
 }

@@ -6,11 +6,15 @@
 #include <vector>
 #include "adversaire.h"
 #include "perso.h"
+#include "hud.h"
+#include "objet.h"
 
 using namespace sf;
 using namespace std;
 
 class BaseDeDonnee {
+
+	Clock deplacementClock;
 
 public:
 	vector<Perso> leJoueur;
@@ -26,6 +30,7 @@ public:
 	void ajoutAdversaires(Adversaire& adv1, Adversaire& adv2, Adversaire& adv3, String personnageChoisi1, String personnageChoisi2, String personnageChoisi3);
 	bool attenteDesAutresJoueurs();
 	void melangeOrdreDePassage();
+	void resolutionActions(Objet& objets, Hud& hud, RenderWindow& window);
 
 private:
 

@@ -34,15 +34,17 @@ class Jeu {
 
 	Sol sol;
 	Perso perso;
+	Adversaire adversaire1;
+	Adversaire adversaire2;
+	Adversaire adversaire3;
 	BaseDeDonnee bdd;
 	Salle salle;
 	Indicateur indicateur;
 	Hud hud;
 
 	Objet objets;
-
-	struct Case { int posX, posY; };
-	vector<Case> listeCase;
+	//struct Case { int posX, posY; };
+	//vector<Case> listeCase;
 	bool initialisationPremiereCase = false;
 	bool attenteCaseSuivante = false;
 	bool confirmation = false;
@@ -60,6 +62,7 @@ public:
 	void bouclePrincipale();
 	void deroulementTour();
 	bool isOpen();
+	void boucleAlternative();
 
 private:
 	void loadFont();

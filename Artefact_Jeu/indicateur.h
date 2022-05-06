@@ -19,7 +19,9 @@ class Indicateur {
 	Sprite sprite_indicateur_impossible;
 	Texture texture_indicateur_impossible;
 
-	
+	int numType = -1;
+	int posJoueurX = -64;
+	int posJoueurY = -64;
 
 
 public:
@@ -27,7 +29,8 @@ public:
 
 	//Proto du contructeur
 	Indicateur();
-	void afficheIndicateur(RenderWindow& window, int numType, int posJoueurX, int posJoueurY);
+	void afficheIndicateur(RenderWindow& window);
+	void updateIndicateur(int numType, int posJoueurX, int posJoueurY);
 	void loadTextureIndicateur();
 	bool casePossible(RenderWindow& window);
 

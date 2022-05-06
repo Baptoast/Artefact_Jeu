@@ -28,6 +28,9 @@ class Perso {
 public:
 	int pv;
 
+	struct Case { int posX, posY; };
+	vector<Case> listeCase;
+
 	int choix = 0;
 	int numeroDeFile = -1;
 	Sprite sprite_perso;

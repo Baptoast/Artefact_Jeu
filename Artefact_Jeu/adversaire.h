@@ -17,7 +17,7 @@ class Adversaire {
 	struct Pos { int posX, posY; };
 
 	Texture texture_adversaire;
-	Sprite sprite_adversaire;
+	
 	Texture texture_portrait;
 	
 
@@ -27,10 +27,14 @@ class Adversaire {
 	Vector2i anim;
 
 public:
+	int pv;
 	Sprite sprite_portrait;
+	Sprite sprite_adversaire;
 	int numeroDeFile = -1;
 	struct Case { int posX, posY; };
-	vector<Case> listeCase; //RENDU ICI !!!
+	vector<Case> listeCase; 
+	int choix = 1;
+	Pos posAdversaire;
 
 	//Proto du contructeur
 	Adversaire();
@@ -54,11 +58,12 @@ public:
 	void choixDeSesActions();
 
 	void afficheAdversaire(RenderWindow& window);
+	void effaceCaseEnregistrees();
 
 
 
 	//attribut private
 private:
-	Pos posAdversaire;
+	
 };
 #endif

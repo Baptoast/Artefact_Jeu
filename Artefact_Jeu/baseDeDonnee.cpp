@@ -9,6 +9,7 @@ void BaseDeDonnee::ajoutJoueur(Perso& perso, String personnageChoisi) {
 	leJoueur.push_back(perso);
 	leJoueur.at(0).loadTexturePerso();
 	leJoueur.at(0).loadTexturePersoPortrait(personnageChoisi);
+	srand(time(NULL));
 }
 
 void BaseDeDonnee::updateJoueur(int x, int y) {
@@ -32,10 +33,10 @@ void BaseDeDonnee::ajoutAdversaires(Adversaire& adv1, Adversaire& adv2, Adversai
 
 void BaseDeDonnee::affichageChosesDansVision(RenderWindow& window) {
 	leJoueur.at(0).affichePerso(window);
-	for (int i = 0; i < listeAdversaire.size(); i++)
-	{
-		if (dansChampDeVision(listeAdversaire.at(i).getPos().posX, listeAdversaire.at(i).getPos().posY)) {
-			listeAdversaire.at(i).afficheAdversaire(window);
+	for (Adversaire adv : listeAdversaire) {
+		//cout << adv.posAdversaire.posX << endl;
+		if (dansChampDeVision(adv.posAdversaire.posX, adv.posAdversaire.posY)) {
+			adv.afficheAdversaire(window);
 		}
 	}
 }
@@ -44,10 +45,10 @@ bool BaseDeDonnee::dansChampDeVision(int x, int y) {
 	int positionJoueurX = leJoueur.at(0).getPos().posX;
 	int positionJoueurY = leJoueur.at(0).getPos().posY;
 
-	if (x >= positionJoueurX - 2 * 64 && x <= positionJoueurX + 3 * 64 && y >= positionJoueurY && y <= positionJoueurY) {
+	if (x >= positionJoueurX - 2 * 64 && x <= positionJoueurX + 2 * 64 && y >= positionJoueurY && y <= positionJoueurY) {
 		return true;
 	}
-	if (y >= positionJoueurY - 2 * 64 && y <= positionJoueurY + 3 * 64 && x >= positionJoueurX && x <= positionJoueurX) {
+	if (y >= positionJoueurY - 2 * 64 && y <= positionJoueurY + 2 * 64 && x >= positionJoueurX && x <= positionJoueurX) {
 		return true;
 	}
 	if (x >= positionJoueurX - 1 * 64 && x <= positionJoueurX + 1 * 64 && y >= positionJoueurY - 1 * 64 && y <= positionJoueurY + 1 * 64) {
@@ -89,7 +90,7 @@ void BaseDeDonnee::melangeOrdreDePassage() {
 		memo2 = -1;
 		memo3 = -1;
 
-		srand((unsigned int)time(0));
+		
 
 		int alea1 = rand() % 4;
 		while (urne.at(alea1) == ancienNumeroJoueur) {
@@ -120,4 +121,56 @@ void BaseDeDonnee::melangeOrdreDePassage() {
 	listeAdversaire.at(0).numeroDeFile = memo2;
 	listeAdversaire.at(1).numeroDeFile = memo3;
 	listeAdversaire.at(2).numeroDeFile = urne.at(0);
+}
+
+void BaseDeDonnee::resolutionActions(Objet& objets, Hud& hud, RenderWindow& window) {
+	for (int i = 0; i < 4; i++)
+	{
+		if (leJoueur.at(0).numeroDeFile == i) {
+			//Deplacement
+			if (leJoueur.at(0).choix == 1) {
+				for (int i = 0; i < leJoueur.at(0).listeCase.size(); i++) {
+					while (deplacementClock.getElapsedTime().asMilliseconds() < 1250);
+					updateJoueur(leJoueur.at(0).listeCase.at(i).posX, leJoueur.at(0).listeCase.at(i).posY);
+					deplacementClock.restart();
+				}
+			}
+			//Fouilles
+			else if (leJoueur.at(0).choix == 2) {
+				objets.gainObjet(0);
+
+			}
+			//Utilisation d'un Objet
+			else if (leJoueur.at(0).choix == 3) {
+				objets.effetObjet(objets.numChoisi, leJoueur, leJoueur.at(0).listeCase.at(0).posX, leJoueur.at(0).listeCase.at(0).posY);
+				objets.inventairePerso.erase(objets.inventairePerso.begin() + objets.numChoisiParRapportAInventaire);
+				objets.numChoisiParRapportAInventaire = -1;
+				objets.numChoisi = -1;
+			}
+			hud.menuAction = true;
+			hud.hud_Actif = false;
+			leJoueur.at(0).listeCase.clear();
+			leJoueur.at(0).choix = 0;
+		}
+		else {
+			
+			for (int t = 0; t < 3; t++) {
+				if (listeAdversaire.at(t).numeroDeFile == i) {
+					if (listeAdversaire.at(t).choix == 1) {
+						for (int k = 0; k < listeAdversaire.at(t).listeCase.size(); k++) {
+							while (deplacementClock.getElapsedTime().asMilliseconds() < 1250);
+							listeAdversaire.at(t).posAdversaire.posX = listeAdversaire.at(t).listeCase.at(k).posX;
+							listeAdversaire.at(t).posAdversaire.posY = listeAdversaire.at(t).listeCase.at(k).posY;
+							listeAdversaire.at(t).sprite_adversaire.setPosition(listeAdversaire.at(t).posAdversaire.posX, listeAdversaire.at(t).posAdversaire.posY);
+							deplacementClock.restart();
+						}
+					}
+				}
+			}
+		}
+	}
+	melangeOrdreDePassage();
+	for (int u = 0; u < 3; u++) {
+		listeAdversaire.at(u).choixDeSesActions();
+	}
 }

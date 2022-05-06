@@ -4,12 +4,19 @@ Indicateur::Indicateur() {
 
 }
 
-void Indicateur::afficheIndicateur(RenderWindow& window, int numType, int posJoueurX, int posJoueurY) {
+void Indicateur::updateIndicateur(int numTy, int x, int y) {
+	numType = numTy;
+	posJoueurX = x;
+	posJoueurY = y;
+}
+
+void Indicateur::afficheIndicateur(RenderWindow& window) {
 	int positionSourisX =  laSouris.getPosition().x - window.getPosition().x;
 	int positionSourisY =  laSouris.getPosition().y - window.getPosition().y;
 
 	int affichageX = (int) positionSourisX / 64;
 	int affichageY = (int) positionSourisY / 64;
+
 	if (numType == 1) {
 		Sprite n0 = sprite_indicateur_possible;
 		Sprite n1 = sprite_indicateur_possible;

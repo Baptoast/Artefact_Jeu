@@ -24,20 +24,33 @@ class Menu {
 	Texture texture_bouton;
 	Texture texture_bg;
 
+	Texture texture_portrait_Jon;
+	Texture texture_portrait_Helene;
+
+	Texture texture_pasPret;
+	Texture texture_Pret;
+
 	TcpSocket socket;
 	Socket::Status status;
 	bool estConnecte = false;
+
+	int nbrDeJoueurCo = 0;
 
 public:
 	Sprite sprite_bouton;
 	Sprite sprite_bg;
 
+	Sprite sprite_portrait_Jon;
+	Sprite sprite_portrait_Helene;
+
 	//Proto du contructeur
 	Menu();
 
+	void connexionAuServeur();
 	void creationMenu();
 	void bouclePrincipale();
 	void loadTextureMenu();
+	void espaceServeur();
 
 	bool isOpen();
 

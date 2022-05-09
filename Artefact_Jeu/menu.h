@@ -15,11 +15,12 @@ using namespace std;
 class Menu {
 	const int SCREEN_SIZE_WEIGHT = 960;
 	const int SCREEN_SIZE_HEIGHT = 960;
-
+	Event event;
 	View vue = View();
-	RenderWindow window;
+	
 
 	Mouse laSouris;
+	Font ecriture;
 
 	Texture texture_bouton;
 	Texture texture_bg;
@@ -30,11 +31,18 @@ class Menu {
 	Texture texture_pasPret;
 	Texture texture_Pret;
 
+	vector<Sprite> portraitJoueurs;
+	vector<Sprite> joueurPret;
+
 	TcpSocket socket;
 	Socket::Status status;
 	bool estConnecte = false;
+	bool demandeEstPret = false;
+	int demandeChangementPerso = -1;
 
-	int nbrDeJoueurCo = 0;
+	int nbrDeJoueurCo = 1;
+
+	bool queLaPartieCommence = false;
 
 public:
 	Sprite sprite_bouton;
@@ -43,10 +51,12 @@ public:
 	Sprite sprite_portrait_Jon;
 	Sprite sprite_portrait_Helene;
 
+	RenderWindow window;
+
 	//Proto du contructeur
 	Menu();
 
-	void connexionAuServeur();
+	int connexionAuServeur();
 	void creationMenu();
 	void bouclePrincipale();
 	void loadTextureMenu();

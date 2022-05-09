@@ -1,25 +1,27 @@
 #include "main.h"
 
-void deroulementTourMain() {
-    jeu.deroulementTour();
-}
-
 void connexionServ() {
-    menu.connexionAuServeur();
+    ticket = menu.connexionAuServeur();
+    lancementDeLaPartie = true;
+    jeu.deroulementTour();
+    thread.terminate();
+    
 }
 
 int main()
 {
+    //Menu
     menu.loadTextureMenu();
     menu.creationMenu();
-    sf::Thread thread(connexionServ);
     thread.launch();
-    while (menu.isOpen()) {
+  
+    while (!lancementDeLaPartie) {
         menu.bouclePrincipale();
     }
+    menu.window.close();
+
+    //Jeu
     jeu.creationJeu();
-    sf::Thread thread2(deroulementTourMain);
-    thread2.launch();
     while (jeu.isOpen()) {
         jeu.bouclePrincipale();
     }

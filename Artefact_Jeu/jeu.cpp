@@ -5,15 +5,15 @@ Jeu::Jeu() {
     salle.loadTextureSalle();
     sol = Sol(1);
     sol.loadTextureSol();
-    perso = Perso(64*3,64*3);
+    perso = Perso(-64,-64);
     objets = Objet();
     objets.loadTextureObjets();
     
     bdd = BaseDeDonnee();
 
-    adversaire1 = Adversaire(64 * 3, 64 * 11);
-    adversaire2 = Adversaire(64 * 11, 64 * 3);
-    adversaire3 = Adversaire(64 * 11, 64 * 11);
+    adversaire1 = Adversaire(-64, -64);
+    adversaire2 = Adversaire(-64, -64);
+    adversaire3 = Adversaire(-64, -64);
 
     bdd.ajoutJoueur(perso,"Jon");
     bdd.ajoutAdversaires(adversaire1, adversaire2, adversaire3,"Helene", "Helene", "Helene");

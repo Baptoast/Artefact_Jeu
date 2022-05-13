@@ -60,24 +60,14 @@ void Jeu::connexionAuServeur(int ticket) {
     bdd.leJoueur.at(0).numPerso = (int)data[0];
     bdd.updateJoueur(convertisseurCoordonnees(data[1]), convertisseurCoordonnees(data[2]));
     bdd.leJoueur.at(0).numeroDeFile = convertisseurCoordonnees(data[3]);
-
-
-    while (window.isOpen()) {
-        
-
-        //Demande du nombre de joueur
-        /*sprintf_s(data, "nbrDeJoueurCo");
-        if (socket.send(data, 100) != Socket::Done) {}
-        if (socket.receive(data, 100, received) != Socket::Done) {}
-        sscanf_s(data, "%d", &nbrDeJoueurCo);*/
-    }
+    deroulementTour();
 }
 
 
 
 void Jeu::bouclePrincipale() {
 
-    //fonction qui capte si un bouton est appuyé (avant il y avait un while).
+    //fonction qui capte si un bouton est appuyÃ© (avant il y avait un while).
     
     if (window.pollEvent(event)) {
 
@@ -98,6 +88,8 @@ void Jeu::bouclePrincipale() {
 }
 
 void Jeu::deroulementTour() {
+    char data[100];
+    std::size_t received;
     while (window.isOpen()) {
         int positionSourisX = laSouris.getPosition().x - window.getPosition().x;
         int positionSourisY = laSouris.getPosition().y - window.getPosition().y;
@@ -133,7 +125,13 @@ void Jeu::deroulementTour() {
                         attenteCaseSuivante = false;
                         confirmation = false;
                         hud.actionDeplacement = false;
-                        bdd.leJoueur.at(0).choix = 1;
+                        //bdd.leJoueur.at(0).choix = 1;
+                        //Partie transfert de l'action
+                        sprintf_s(data, "D");
+                        for(int y = 0; y != 3; y++;) {
+                            sprintf_s(data, "%s%c%c", data,convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y+1).posX)/64),convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y+1).posY)/64));
+                        }
+                        nombreActions +=1;
                     }
                     else if (confirmation && hud.confirmationChoix) {
                         hud.confirmationBouton(window);
@@ -153,7 +151,10 @@ void Jeu::deroulementTour() {
                     cout << "c'est confirmer, on attend maintenant" << endl;
                     confirmation = false;
                     hud.actionFouille = false;
-                    bdd.leJoueur.at(0).choix = 2;
+                    //bdd.leJoueur.at(0).choix = 2;
+                    //Partie transfert de l'action
+                    sprintf_s(data, "%sF", data);
+                    nombreActions +=1;
                 }
                 else if (confirmation && hud.confirmationChoix) {
                     hud.confirmationBouton(window);
@@ -187,7 +188,10 @@ void Jeu::deroulementTour() {
                             hud.actionObjets = false;
                             hud.inventaireGros = false;
                             attenteCaseSuivante = false;
-                            bdd.leJoueur.at(0).choix = 3;
+                            //bdd.leJoueur.at(0).choix = 3;
+                            //Partie transfert de l'action
+                            sprintf_s(data, "%sF", data);
+                            nombreActions +=1;
                         }
                         else if (confirmation && hud.confirmationChoix) {
                             hud.confirmationBouton(window);

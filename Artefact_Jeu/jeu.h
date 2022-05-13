@@ -13,6 +13,7 @@
 #include "objet.h"
 #include <Windows.h>
 #include <vector>
+#include <SFML/Network.hpp>
 
 //Constantes du Programme
 const int SCREEN_SIZE_WEIGHT = 960;
@@ -49,6 +50,9 @@ class Jeu {
 	bool attenteCaseSuivante = false;
 	bool confirmation = false;
 
+	TcpSocket socket;
+	Socket::Status status;
+
 public:
 	//Proto du contructeur
 	Jeu();
@@ -63,6 +67,11 @@ public:
 	void deroulementTour();
 	bool isOpen();
 	void boucleAlternative();
+	void connexionAuServeur(int ticket);
+
+	int convertisseurCoordonnees(char lettre);
+	char convertisseurCoordonneesVersLettres(int nombre);
+	int convertisseurIdObjets(char chiffre1, char chiffre2);
 
 private:
 	void loadFont();

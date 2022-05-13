@@ -18,3 +18,4 @@ void deroulementTourMain();
 Jeu jeu;
 Menu menu;
 Thread thread(connexionServ);
+Thread thread2(connexionServ2);

@@ -3,9 +3,15 @@
 void connexionServ() {
     ticket = menu.connexionAuServeur();
     lancementDeLaPartie = true;
-    jeu.deroulementTour();
+    //jeu.deroulementTour();
     thread.terminate();
     
+}
+
+void connexionServ2() {
+    jeu.connexionAuServeur(ticket);
+    thread2.terminate();
+
 }
 
 int main()
@@ -22,6 +28,7 @@ int main()
 
     //Jeu
     jeu.creationJeu();
+    thread2.launch();
     while (jeu.isOpen()) {
         jeu.bouclePrincipale();
     }

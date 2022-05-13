@@ -44,6 +44,35 @@ bool Jeu::isOpen() {
     return window.isOpen();
 }
 
+//Thread
+void Jeu::connexionAuServeur(int ticket) {
+    char data[100];
+    std::size_t received;
+
+    int port = 53000 + ticket;
+    status = socket.connect("192.168.1.27", port);
+    while (status != Socket::Done) {}
+
+    //Demande premieres info (Personnage,positionX,positionY,OrdreDansPremierTour) et les initialises
+    sprintf_s(data, "initialisation");
+    if (socket.send(data, 100) != Socket::Done) {}
+    if (socket.receive(data, 100, received) != Socket::Done) {}
+    bdd.leJoueur.at(0).numPerso = (int)data[0];
+    bdd.updateJoueur(convertisseurCoordonnees(data[1]), convertisseurCoordonnees(data[2]));
+    bdd.leJoueur.at(0).numeroDeFile = convertisseurCoordonnees(data[3]);
+
+
+    while (window.isOpen()) {
+        
+
+        //Demande du nombre de joueur
+        /*sprintf_s(data, "nbrDeJoueurCo");
+        if (socket.send(data, 100) != Socket::Done) {}
+        if (socket.receive(data, 100, received) != Socket::Done) {}
+        sscanf_s(data, "%d", &nbrDeJoueurCo);*/
+    }
+}
+
 
 
 void Jeu::bouclePrincipale() {
@@ -182,3 +211,48 @@ void Jeu::deroulementTour() {
 
 
 
+int Jeu::convertisseurCoordonnees(char lettre) {
+    switch (lettre) {
+    case 'a': return 0;
+    case 'b': return 1;
+    case 'c': return 2;
+    case 'd': return 3;
+    case 'e': return 4;
+    case 'f': return 5;
+    case 'g': return 6;
+    case 'h': return 7;
+    case 'i': return 8;
+    case 'j': return 9;
+    case 'k': return 10;
+    case 'l': return 11;
+    case 'm': return 12;
+    case 'n': return 13;
+    case 'o': return 14;
+    }
+    return -1;
+}
+
+char Jeu::convertisseurCoordonneesVersLettres(int nombre) {
+    switch (nombre) {
+    case 0: return 'a';
+    case 1: return 'b';
+    case 2: return 'c';
+    case 3: return 'd';
+    case 4: return 'e';
+    case 5: return 'f';
+    case 6: return 'g';
+    case 7: return 'h';
+    case 8: return 'i';
+    case 9: return 'j';
+    case 10: return 'k';
+    case 11: return 'l';
+    case 12: return 'm';
+    case 13: return 'n';
+    case 14: return 'o';
+    }
+    return 'z';
+}
+
+int Jeu::convertisseurIdObjets(char chiffre1, char chiffre2) {
+    return ((int)chiffre1 - 48) * 10 + (int)chiffre2 - 48;
+}

@@ -147,6 +147,7 @@ int Menu::connexionAuServeur() {
 		if (socket.receive(data, 100, received) != Socket::Done) {}
 		if (data[0] == '1' || data[0] == '2'|| data[0] == '3' || data[0] == '4') {
 			queLaPartieCommence = true;
+			socket.disconnect();
 			return (int)data[0] - 48;
 		}
 		

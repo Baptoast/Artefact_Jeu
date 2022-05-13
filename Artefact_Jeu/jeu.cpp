@@ -206,9 +206,12 @@ void Jeu::deroulementTour() {
                     }
                 }
             }
-            if (!bdd.attenteDesAutresJoueurs()) {
+            //Envoi des donnees
+            /*if (!bdd.attenteDesAutresJoueurs()) {
                 bdd.resolutionActions(objets, hud,window);
-            }
+            }*/
+            if (socket.send(data, 100) != Socket::Done) {}
+            if (socket.receive(data, 100, received) != Socket::Done) {}
         }
     }
 }

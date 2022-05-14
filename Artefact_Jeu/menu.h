@@ -38,7 +38,7 @@ class Menu {
 	Socket::Status status;
 	bool estConnecte = false;
 	bool demandeEstPret = false;
-	int demandeChangementPerso = -1;
+	int demandeChangementPerso = 1;
 
 	int nbrDeJoueurCo = 1;
 

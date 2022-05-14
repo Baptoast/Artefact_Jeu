@@ -13,6 +13,7 @@ bool lancementDeLaPartie = false;
 int ticket = -1;
 
 void connexionServ();
+void connexionServ2();
 void deroulementTourMain();
 
 Jeu jeu;

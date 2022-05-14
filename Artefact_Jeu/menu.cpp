@@ -88,20 +88,51 @@ int Menu::connexionAuServeur() {
 		char data[100];
 		std::size_t received;
 
+		//Envoie
+		sprintf_s(data, "%d%d", demandeChangementPerso, demandeEstPret);
+		if (socket.send(data, 100) != Socket::Done) {}
+		//Reçoit
+		if (socket.receive(data, 100, received) != Socket::Done) {}
+		nbrDeJoueurCo = (int)data[0] - 48;
+		for (int k = 0; k < nbrDeJoueurCo; k++) {
+			if (data[k+1] == '1') {
+				portraitJoueurs.at(k).setTexture(texture_portrait_Jon);
+			}
+			else if (data[k+1] == '2') {
+				portraitJoueurs.at(k).setTexture(texture_portrait_Helene);
+			}
+		}
+		for (int k = 0; k < nbrDeJoueurCo; k++) {
+
+			if (data[k+5] == '0') {
+				joueurPret.at(k).setTexture(texture_pasPret);
+			}
+			else if (data[k+5] == '1') {
+				joueurPret.at(k).setTexture(texture_Pret);
+			}
+		}
+		if (data[9] == '1' || data[9] == '2' || data[9] == '3' || data[9] == '4') {
+			queLaPartieCommence = true;
+			socket.disconnect();
+			return (int)data[9] - 48;
+		}
+
+		/*
+
 		//Demande du nombre de joueur
 		sprintf_s(data, "nbrDeJoueurCo");
 		if (socket.send(data, 100) != Socket::Done) {}
 		if (socket.receive(data, 100, received) != Socket::Done) {}
-		sscanf_s(data, "%d", &nbrDeJoueurCo);
+		nbrDeJoueurCo = (int)data[0] - 48;
 
 		//Demande des personnages choisi par chaques joueurs
 		sprintf_s(data, "portraitsJoueurs");
 		if (socket.send(data, 100) != Socket::Done) {}
 		if (socket.receive(data, 100, received) != Socket::Done) {}
 		for (int k = 0; k < nbrDeJoueurCo; k++) {
-			if (data[k] == '0') {
+			if (data[k] == '1') {
 				portraitJoueurs.at(k).setTexture(texture_portrait_Jon);
-			}else if (data[k] == '1') {
+			}else if (data[k] == '2') {
 				portraitJoueurs.at(k).setTexture(texture_portrait_Helene);
 			}
 			
@@ -138,7 +169,6 @@ int Menu::connexionAuServeur() {
 		if (demandeEstPret) {
 			sprintf_s(data, "readyBro");
 			if (socket.send(data, 100) != Socket::Done) {}
-			demandeEstPret = false;
 		}
 
 		//Demande si la partie peux commencer
@@ -150,6 +180,7 @@ int Menu::connexionAuServeur() {
 			socket.disconnect();
 			return (int)data[0] - 48;
 		}
+		*/
 		
 		
 	}
@@ -169,10 +200,10 @@ void Menu::bouclePrincipale() {
 	window.draw(sprite_portrait_Helene);
 
 	if (sprite_portrait_Jon.getGlobalBounds().contains(positionSourisX, positionSourisY) && laSouris.isButtonPressed(laSouris.Left)) {
-		demandeChangementPerso = 0;
+		demandeChangementPerso = 1;
 	}
 	else if (sprite_portrait_Helene.getGlobalBounds().contains(positionSourisX, positionSourisY) && laSouris.isButtonPressed(laSouris.Left)) {
-		demandeChangementPerso = 1;
+		demandeChangementPerso = 2;
 	}
 
 	if (sprite_bouton.getGlobalBounds().contains(positionSourisX, positionSourisY) && laSouris.isButtonPressed(laSouris.Left)) {

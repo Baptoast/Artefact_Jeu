@@ -53,6 +53,9 @@ class Jeu {
 	TcpSocket socket;
 	Socket::Status status;
 
+	int nombreActions = 0;
+	int numeroJoueur = -1;
+
 public:
 	//Proto du contructeur
 	Jeu();

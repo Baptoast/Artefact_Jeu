@@ -48,18 +48,19 @@ bool Jeu::isOpen() {
 void Jeu::connexionAuServeur(int ticket) {
     char data[100];
     std::size_t received;
+    numeroJoueur = ticket;
 
     int port = 53000 + ticket;
     status = socket.connect("192.168.1.27", port);
     while (status != Socket::Done) {}
 
     //Demande premieres info (Personnage,positionX,positionY,OrdreDansPremierTour) et les initialises
-    sprintf_s(data, "initialisation");
-    if (socket.send(data, 100) != Socket::Done) {}
     if (socket.receive(data, 100, received) != Socket::Done) {}
-    bdd.leJoueur.at(0).numPerso = (int)data[0];
-    bdd.updateJoueur(convertisseurCoordonnees(data[1]), convertisseurCoordonnees(data[2]));
-    bdd.leJoueur.at(0).numeroDeFile = convertisseurCoordonnees(data[3]);
+
+    bdd.leJoueur.at(0).numPerso = (int)data[0] - 48;
+    bdd.updateJoueur(convertisseurCoordonnees(data[1])*64, convertisseurCoordonnees(data[2])*64);
+    bdd.leJoueur.at(0).numeroDeFile = (int)data[3] - 48;
+    
     deroulementTour();
 }
 
@@ -90,23 +91,96 @@ void Jeu::bouclePrincipale() {
 void Jeu::deroulementTour() {
     char data[100];
     std::size_t received;
+    if (socket.receive(data, 100, received) != Socket::Done) {}
+    sprintf_s(data, "");
+
     while (window.isOpen()) {
         int positionSourisX = laSouris.getPosition().x - window.getPosition().x;
         int positionSourisY = laSouris.getPosition().y - window.getPosition().y;
         
-        if (!hud.menuAction) {
-            hud.hud_Actif = true;
-            if (hud.actionDeplacement) {
-                if (bdd.leJoueur.at(0).listeCase.size() <= 3) {
-                    if (!initialisationPremiereCase) {
+        hud.hud_Actif = true;
+        if (hud.actionDeplacement) {
+            if (bdd.leJoueur.at(0).listeCase.size() <= 3) {
+                if (!initialisationPremiereCase) {
                     
-                        Perso::Case posJoueurActuel;
-                        posJoueurActuel.posX = bdd.leJoueur.at(0).getPos().posX;
-                        posJoueurActuel.posY = bdd.leJoueur.at(0).getPos().posY;
-                        bdd.leJoueur.at(0).listeCase.push_back(posJoueurActuel);
-                        initialisationPremiereCase = true;
+                    Perso::Case posJoueurActuel;
+                    posJoueurActuel.posX = bdd.leJoueur.at(0).getPos().posX;
+                    posJoueurActuel.posY = bdd.leJoueur.at(0).getPos().posY;
+                    bdd.leJoueur.at(0).listeCase.push_back(posJoueurActuel);
+                    initialisationPremiereCase = true;
+                }
+                indicateur.updateIndicateur(1, bdd.leJoueur.at(0).listeCase.at(bdd.leJoueur.at(0).listeCase.size() - 1).posX, bdd.leJoueur.at(0).listeCase.at(bdd.leJoueur.at(0).listeCase.size() - 1).posY);
+                if (laSouris.isButtonPressed(laSouris.Left) && indicateur.casePossible(window) && !attenteCaseSuivante) {
+                    Perso::Case caseSuivante;
+                    caseSuivante.posX = (positionSourisX / 64) * 64;
+                    caseSuivante.posY = (positionSourisY / 64) * 64;
+                    bdd.leJoueur.at(0).listeCase.push_back(caseSuivante);
+                    indicateur.listeCasePossible.clear();
+                    attenteCaseSuivante = true;
+                }
+                else if (attenteCaseSuivante && !laSouris.isButtonPressed(laSouris.Left)) attenteCaseSuivante = false;
+            }
+            else {
+                if (confirmation && !hud.confirmationChoix) {
+                    //ICI ON PASSE EN ATTENTE
+                    cout << "une action confirmee" << endl;
+                    initialisationPremiereCase = false;
+                    attenteCaseSuivante = false;
+                    confirmation = false;
+                    hud.actionDeplacement = false;
+                    
+                    //bdd.leJoueur.at(0).choix = 1;
+                    //Partie transfert de l'action
+                    sprintf_s(data, "%sD", data);
+                    for(int y = 0; y != 3; y++) {
+                        sprintf_s(data, "%s%c%c", data,convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y+1).posX)/64),convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y+1).posY)/64));
                     }
-                    indicateur.updateIndicateur(1, bdd.leJoueur.at(0).listeCase.at(bdd.leJoueur.at(0).listeCase.size() - 1).posX, bdd.leJoueur.at(0).listeCase.at(bdd.leJoueur.at(0).listeCase.size() - 1).posY);
+                    nombreActions +=1;
+                    if (nombreActions < 2) {
+                        hud.menuAction = true;
+                    }
+                }
+                else if (confirmation && hud.confirmationChoix) {
+                    hud.confirmationBouton(window);
+                }
+                else if (!confirmation && !hud.confirmationChoix) {
+                    hud.confirmationChoix = true;
+                    hud.confirmationBouton(window);
+                    indicateur.updateIndicateur(-1, -64, -64);
+                    confirmation = true;
+                }
+            }
+            
+        }
+        if (hud.actionFouille) {
+            if (confirmation && !hud.confirmationChoix) {
+                //ICI ON PASSE EN ATTENTE
+                cout << "une action confirmee" << endl;
+                confirmation = false;
+                hud.actionFouille = false;
+                
+                //bdd.leJoueur.at(0).choix = 2;
+                //Partie transfert de l'action
+                sprintf_s(data, "%sF", data);
+                nombreActions +=1;
+                if (nombreActions < 2) {
+                    hud.menuAction = true;
+                }
+            }
+            else if (confirmation && hud.confirmationChoix) {
+                hud.confirmationBouton(window);
+            }
+            else if (!confirmation && !hud.confirmationChoix) {
+                hud.confirmationChoix = true;
+                hud.confirmationBouton(window);
+                confirmation = true;
+            }
+        }
+        if (hud.actionObjets) {
+            hud.inventaireGros = true;
+            if (objets.numChoisi !=-1) {
+                if (bdd.leJoueur.at(0).listeCase.size() <= 0) {
+                    indicateur.updateIndicateur(objets.numeroIndicateurObjetUtilisation(objets.numChoisi), bdd.leJoueur.at(0).getPos().posX, bdd.leJoueur.at(0).getPos().posY);
                     if (laSouris.isButtonPressed(laSouris.Left) && indicateur.casePossible(window) && !attenteCaseSuivante) {
                         Perso::Case caseSuivante;
                         caseSuivante.posX = (positionSourisX / 64) * 64;
@@ -121,17 +195,18 @@ void Jeu::deroulementTour() {
                     if (confirmation && !hud.confirmationChoix) {
                         //ICI ON PASSE EN ATTENTE
                         cout << "c'est confirmer, on attend maintenant" << endl;
-                        initialisationPremiereCase = false;
-                        attenteCaseSuivante = false;
                         confirmation = false;
-                        hud.actionDeplacement = false;
-                        //bdd.leJoueur.at(0).choix = 1;
+                        hud.actionObjets = false;
+                        hud.inventaireGros = false;
+                        attenteCaseSuivante = false;
+                       
+                        //bdd.leJoueur.at(0).choix = 3;
                         //Partie transfert de l'action
-                        sprintf_s(data, "D");
-                        for(int y = 0; y != 3; y++;) {
-                            sprintf_s(data, "%s%c%c", data,convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y+1).posX)/64),convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y+1).posY)/64));
-                        }
+                        sprintf_s(data, "%sF", data);
                         nombreActions +=1;
+                        if (nombreActions < 2) {
+                            hud.menuAction = true;
+                        }
                     }
                     else if (confirmation && hud.confirmationChoix) {
                         hud.confirmationBouton(window);
@@ -139,80 +214,50 @@ void Jeu::deroulementTour() {
                     else if (!confirmation && !hud.confirmationChoix) {
                         hud.confirmationChoix = true;
                         hud.confirmationBouton(window);
-                        indicateur.updateIndicateur(-1, -64, -64);
                         confirmation = true;
-                    }
-                }
-            
-            }
-            if (hud.actionFouille) {
-                if (confirmation && !hud.confirmationChoix) {
-                    //ICI ON PASSE EN ATTENTE
-                    cout << "c'est confirmer, on attend maintenant" << endl;
-                    confirmation = false;
-                    hud.actionFouille = false;
-                    //bdd.leJoueur.at(0).choix = 2;
-                    //Partie transfert de l'action
-                    sprintf_s(data, "%sF", data);
-                    nombreActions +=1;
-                }
-                else if (confirmation && hud.confirmationChoix) {
-                    hud.confirmationBouton(window);
-                }
-                else if (!confirmation && !hud.confirmationChoix) {
-                    hud.confirmationChoix = true;
-                    hud.confirmationBouton(window);
-                    confirmation = true;
-                }
-            }
-            if (hud.actionObjets) {
-                hud.inventaireGros = true;
-                if (objets.numChoisi !=-1) {
-                    if (bdd.leJoueur.at(0).listeCase.size() <= 0) {
-                        indicateur.updateIndicateur(objets.numeroIndicateurObjetUtilisation(objets.numChoisi), bdd.leJoueur.at(0).getPos().posX, bdd.leJoueur.at(0).getPos().posY);
-                        if (laSouris.isButtonPressed(laSouris.Left) && indicateur.casePossible(window) && !attenteCaseSuivante) {
-                            Perso::Case caseSuivante;
-                            caseSuivante.posX = (positionSourisX / 64) * 64;
-                            caseSuivante.posY = (positionSourisY / 64) * 64;
-                            bdd.leJoueur.at(0).listeCase.push_back(caseSuivante);
-                            indicateur.listeCasePossible.clear();
-                            attenteCaseSuivante = true;
-                        }
-                        else if (attenteCaseSuivante && !laSouris.isButtonPressed(laSouris.Left)) attenteCaseSuivante = false;
-                    }
-                    else {
-                        if (confirmation && !hud.confirmationChoix) {
-                            //ICI ON PASSE EN ATTENTE
-                            cout << "c'est confirmer, on attend maintenant" << endl;
-                            confirmation = false;
-                            hud.actionObjets = false;
-                            hud.inventaireGros = false;
-                            attenteCaseSuivante = false;
-                            //bdd.leJoueur.at(0).choix = 3;
-                            //Partie transfert de l'action
-                            sprintf_s(data, "%sF", data);
-                            nombreActions +=1;
-                        }
-                        else if (confirmation && hud.confirmationChoix) {
-                            hud.confirmationBouton(window);
-                        }
-                        else if (!confirmation && !hud.confirmationChoix) {
-                            hud.confirmationChoix = true;
-                            hud.confirmationBouton(window);
-                            confirmation = true;
-                            indicateur.updateIndicateur(-1, -64, -64);
+                        indicateur.updateIndicateur(-1, -64, -64);
 
-                        }
                     }
                 }
             }
-            //Envoi des donnees
-            /*if (!bdd.attenteDesAutresJoueurs()) {
-                bdd.resolutionActions(objets, hud,window);
-            }*/
-            if (socket.send(data, 100) != Socket::Done) {}
-            if (socket.receive(data, 100, received) != Socket::Done) {}
         }
+            
+        //Envoi des donnees
+        if (nombreActions == 2) {
+            cout << "envoie actions" << endl;
+            if (socket.send(data, 100) != Socket::Done) {}
+            while (strcmp(data, "Z") != 0) {
+                if (socket.receive(data, 100, received) != Socket::Done) {}
+                cout << "reçoit actions" << endl;
+                //Action joueurs (ennemis ou le joueur)
+                if (data[0] == 'J') {
+                       //Action joueur
+                    if ((int)data[1] == numeroJoueur) {
+                        switch (data[2])
+                        {
+                        //Le joueur ce déplace
+                        case 'D': {
+                            bdd.updateJoueur(convertisseurCoordonnees(data[3]) * 64, convertisseurCoordonnees(data[4]) * 64);
+                            break;
+                        }
+                        //Le joueur fouille
+                        case 'F': {
+                            objets.gainObjet(convertisseurIdObjets(data[3], data[4]));
+                            break;
+                        }
+                        }
+                    }
+                    //Actions des adversaires
+                    else {
+                        int numeroDeLadversaire = (int)data[1];
+
+                    }
+                    
+                }
+            }
+            nombreActions = 0;
+        }
+            
     }
 }
 

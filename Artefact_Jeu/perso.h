@@ -17,6 +17,7 @@ class Perso {
 	struct Pos { int posX, posY; };
 
 	Texture texture_perso;
+	Texture texture_perso_clone;
 	Texture texture_vision;
 	Texture texture_portrait;
 	
@@ -35,8 +36,11 @@ public:
 	int numeroDeFile = -1;
 	int numPerso = -1;
 	Sprite sprite_perso;
+	Sprite sprite_perso_clone;
 	Sprite sprite_vision;
 	Sprite sprite_portrait;
+
+	bool cloneActif = false;
 
 	//Proto du contructeur
 	Perso();
@@ -57,7 +61,7 @@ public:
 	float anglePointsDegree(int x1, int y1, int x2, int y2);
 	void loadTexturePersoPortrait(String personnageChoisi);
 
-	void affichePerso(RenderWindow& window);
+	void affichePerso(RenderWindow& window, bool afficheClone);
 
 
 

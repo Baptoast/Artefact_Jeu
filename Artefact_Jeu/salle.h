@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 
 using namespace sf;
 using namespace std;
@@ -17,6 +18,9 @@ class Salle {
 
 
 public:
+	vector<int> posXmurs;
+	vector<int> posYmurs;
+
 	//Proto du contructeur
 	Salle();
 	Salle(int numMap);

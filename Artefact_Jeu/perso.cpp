@@ -44,6 +44,13 @@ void Perso::loadTexturePerso() {
 		//Je charge la texture
 		sprite_vision.setTexture(texture_vision);
 	}
+	if (!texture_perso_clone.loadFromFile("res/img/pieges/bouletJ.png")) {
+		cout << "erreur de chargement du personnage" << endl;
+	}
+	else {
+		//Je charge la texture
+		sprite_perso_clone.setTexture(texture_perso_clone);
+	}
 };
 
 void Perso::loadTexturePersoPortrait(String personnageChoisi) {
@@ -56,10 +63,14 @@ void Perso::loadTexturePersoPortrait(String personnageChoisi) {
 	}
 };
 
-void Perso::affichePerso(RenderWindow& window) {
+void Perso::affichePerso(RenderWindow& window,bool afficheClone) {
 
 	sprite_vision.setTextureRect(IntRect(0, 0, 350, 350));
 	sprite_perso.setTextureRect(IntRect(0, 0, 64, 64));
+
+	if (afficheClone) {
+		window.draw(sprite_perso_clone);
+	}
 
 	window.draw(sprite_vision);
 	window.draw(sprite_perso);

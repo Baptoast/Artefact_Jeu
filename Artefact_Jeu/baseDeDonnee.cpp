@@ -19,24 +19,42 @@ void BaseDeDonnee::updateJoueur(int x, int y) {
 	leJoueur.at(0).sprite_vision.setPosition(x - 175 + 32, y - 175 + 32);
 }
 
-void BaseDeDonnee::ajoutAdversaires(Adversaire& adv1, Adversaire& adv2, Adversaire& adv3, String personnageChoisi1, String personnageChoisi2, String personnageChoisi3) {
+void BaseDeDonnee::ajoutAdversaires(Adversaire& adv1, Adversaire& adv2, Adversaire& adv3, Adversaire& adv4, String personnageChoisi1, String personnageChoisi2, String personnageChoisi3, String personnageChoisi4) {
 	listeAdversaire.push_back(adv1);
 	listeAdversaire.push_back(adv2);
 	listeAdversaire.push_back(adv3);
+	listeAdversaire.push_back(adv4);
 	listeAdversaire.at(0).loadTextureAdversaire();
 	listeAdversaire.at(1).loadTextureAdversaire();
 	listeAdversaire.at(2).loadTextureAdversaire();
+	listeAdversaire.at(3).loadTextureAdversaire();
 	listeAdversaire.at(0).loadTextureAdversairePortrait(personnageChoisi1);
 	listeAdversaire.at(1).loadTextureAdversairePortrait(personnageChoisi2);
 	listeAdversaire.at(2).loadTextureAdversairePortrait(personnageChoisi3);
+	listeAdversaire.at(3).loadTextureAdversairePortrait(personnageChoisi4);
 }
 
 void BaseDeDonnee::affichageChosesDansVision(RenderWindow& window) {
-	leJoueur.at(0).affichePerso(window);
-	for (Adversaire adv : listeAdversaire) {
-		//cout << adv.posAdversaire.posX << endl;
-		if (dansChampDeVision(adv.posAdversaire.posX, adv.posAdversaire.posY)) {
-			adv.afficheAdversaire(window);
+	if (leJoueur.at(0).listeCase.size() >= 4) {
+		if (leJoueur.at(0).listeCase.size() == 7) {
+			leJoueur.at(0).sprite_perso_clone.setPosition(leJoueur.at(0).listeCase.at(leJoueur.at(0).listeCase.size() - 1).posX, leJoueur.at(0).listeCase.at(leJoueur.at(0).listeCase.size() - 1).posY);
+		}
+		else {
+			leJoueur.at(0).sprite_perso_clone.setPosition(leJoueur.at(0).listeCase.at(3).posX, leJoueur.at(0).listeCase.at(3).posY);
+		}
+		leJoueur.at(0).cloneActif = true;
+		leJoueur.at(0).affichePerso(window,true);
+	}
+	else {
+		leJoueur.at(0).cloneActif = false;
+		leJoueur.at(0).affichePerso(window,false);
+	}
+
+	for (int i = 0; i < listeAdversaire.size(); i++)
+	{
+		cout << listeAdversaire.at(i).sprite_adversaire.getPosition().x << endl;
+		if (dansChampDeVision(listeAdversaire.at(i).posAdversaire.posX, listeAdversaire.at(i).posAdversaire.posY)) {
+			listeAdversaire.at(i).afficheAdversaire(window);
 		}
 	}
 }

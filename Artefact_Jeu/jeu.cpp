@@ -14,9 +14,10 @@ Jeu::Jeu() {
     adversaire1 = Adversaire(-64, -64);
     adversaire2 = Adversaire(-64, -64);
     adversaire3 = Adversaire(-64, -64);
+    adversaire4 = Adversaire(-64, -64);
 
     bdd.ajoutJoueur(perso,"Jon");
-    bdd.ajoutAdversaires(adversaire1, adversaire2, adversaire3,"Helene", "Helene", "Helene");
+    bdd.ajoutAdversaires(adversaire1, adversaire2, adversaire3,adversaire4,"Jon", "Jon", "Jon", "Jon");
 
     indicateur.loadTextureIndicateur();
     hud.loadTextureHud(window);
@@ -78,7 +79,7 @@ void Jeu::bouclePrincipale() {
     sol.afficheSol(window);
     bdd.affichageChosesDansVision(window);
     salle.afficheSalle(window);
-    indicateur.afficheIndicateur(window);
+    indicateur.afficheIndicateur(window,salle.posXmurs,salle.posYmurs);
     hud.afficheHud(window, objets, bdd.leJoueur, bdd.listeAdversaire);
 
     window.setView(vue);
@@ -100,9 +101,8 @@ void Jeu::deroulementTour() {
         
         hud.hud_Actif = true;
         if (hud.actionDeplacement) {
-            if (bdd.leJoueur.at(0).listeCase.size() <= 3) {
-                if (!initialisationPremiereCase) {
-                    
+            if (bdd.leJoueur.at(0).listeCase.size() <= 3 || (bdd.leJoueur.at(0).cloneActif && bdd.leJoueur.at(0).listeCase.size() <= 6 && nombreActions >= 1)) {
+                if (!initialisationPremiereCase && !bdd.leJoueur.at(0).cloneActif) {
                     Perso::Case posJoueurActuel;
                     posJoueurActuel.posX = bdd.leJoueur.at(0).getPos().posX;
                     posJoueurActuel.posY = bdd.leJoueur.at(0).getPos().posY;
@@ -110,6 +110,8 @@ void Jeu::deroulementTour() {
                     initialisationPremiereCase = true;
                 }
                 indicateur.updateIndicateur(1, bdd.leJoueur.at(0).listeCase.at(bdd.leJoueur.at(0).listeCase.size() - 1).posX, bdd.leJoueur.at(0).listeCase.at(bdd.leJoueur.at(0).listeCase.size() - 1).posY);
+                clk.restart();
+                while (clk.getElapsedTime().asMilliseconds() < 50) {}
                 if (laSouris.isButtonPressed(laSouris.Left) && indicateur.casePossible(window) && !attenteCaseSuivante) {
                     Perso::Case caseSuivante;
                     caseSuivante.posX = (positionSourisX / 64) * 64;
@@ -132,8 +134,8 @@ void Jeu::deroulementTour() {
                     //bdd.leJoueur.at(0).choix = 1;
                     //Partie transfert de l'action
                     sprintf_s(data, "%sD", data);
-                    for(int y = 0; y != 3; y++) {
-                        sprintf_s(data, "%s%c%c", data,convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y+1).posX)/64),convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y+1).posY)/64));
+                    for(int y = 1 + nombreActions*3; y != 4 + nombreActions * 3; y++) {
+                        sprintf_s(data, "%s%c%c", data,convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y).posX)/64),convertisseurCoordonneesVersLettres((bdd.leJoueur.at(0).listeCase.at(y).posY)/64));
                     }
                     nombreActions +=1;
                     if (nombreActions < 2) {
@@ -228,16 +230,26 @@ void Jeu::deroulementTour() {
             if (socket.send(data, 100) != Socket::Done) {}
             while (strcmp(data, "Z") != 0) {
                 if (socket.receive(data, 100, received) != Socket::Done) {}
-                cout << "reçoit actions" << endl;
+                cout << "reçoit actions : " << data << endl;
                 //Action joueurs (ennemis ou le joueur)
                 if (data[0] == 'J') {
-                       //Action joueur
-                    if ((int)data[1] == numeroJoueur) {
+                    //Votre action réalisee + info decouverte si déplacement ou autre
+                    if ((int)data[1]-48 == numeroJoueur) {
                         switch (data[2])
                         {
                         //Le joueur ce déplace
                         case 'D': {
                             bdd.updateJoueur(convertisseurCoordonnees(data[3]) * 64, convertisseurCoordonnees(data[4]) * 64);
+                            //Vision des obstacles et joueurs (ça peut peter...)
+                            int compte = 0;
+                            while (data[5 + compte] == 'J' || data[5 + compte] == 'O') {
+                                if ((int)data[6 + compte] - 48 != numeroJoueur) {
+                                    bdd.listeAdversaire.at((int)data[6 + compte]-48 -1).setPosX(convertisseurCoordonnees(data[7 + compte])*64);
+                                    bdd.listeAdversaire.at((int)data[6 + compte] - 48 - 1).setPosY(convertisseurCoordonnees(data[8 + compte]) * 64);
+                                    bdd.listeAdversaire.at((int)data[6 + compte] - 48 - 1).sprite_adversaire.setPosition((convertisseurCoordonnees(data[7 + compte]) * 64), (convertisseurCoordonnees(data[8 + compte]) * 64));
+                                };
+                                compte += 3;
+                            }
                             break;
                         }
                         //Le joueur fouille
@@ -249,13 +261,15 @@ void Jeu::deroulementTour() {
                     }
                     //Actions des adversaires
                     else {
-                        int numeroDeLadversaire = (int)data[1];
+                        int numeroDeLadversaire = (int)data[1]-48;
 
                     }
                     
                 }
             }
+            bdd.leJoueur.at(0).listeCase.clear();
             nombreActions = 0;
+            hud.menuAction = true;
         }
             
     }
@@ -306,5 +320,8 @@ char Jeu::convertisseurCoordonneesVersLettres(int nombre) {
 }
 
 int Jeu::convertisseurIdObjets(char chiffre1, char chiffre2) {
-    return ((int)chiffre1 - 48) * 10 + (int)chiffre2 - 48;
+    cout << chiffre1 << (int)chiffre1 << endl;
+    cout << chiffre2 << (int)chiffre2 << endl;
+    cout << (((int)chiffre1 - 48) * 10) + ((int)chiffre2 - 48) << endl;
+    return (((int)chiffre1 - 48) * 10) + ((int)chiffre2 - 48);
 }

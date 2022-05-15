@@ -38,6 +38,7 @@ class Jeu {
 	Adversaire adversaire1;
 	Adversaire adversaire2;
 	Adversaire adversaire3;
+	Adversaire adversaire4;
 	BaseDeDonnee bdd;
 	Salle salle;
 	Indicateur indicateur;

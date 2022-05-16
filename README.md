@@ -67,3 +67,16 @@ Les objets sont divisés en trois catégories : Armes, Utilitaire et Piège.
 | Bombe | Piège | Inflige 2 point de dégâts |
 | Fosse cachée | Piège | Inflige 1 point de dégâts, empêche les déplacements suivants |
 | Rocher roulant | Piège | Invoque un rocher qui roule lentement| et pousse les ennemis sur son passage en leurs infligeant 4 point de dégâts. |
+
+### Les artéfacts
+
+Lorsque vous réussissez à réunir 5 fragments d'artéfacts, vous obtenez 1 des 4 artéfacts primordiaux aléatoirement :
+
+A chaque utilisation, l'artéfact gagne en puissance (après un temps de recharge de 2 tours), jusqu'au niveau 3.
+
+| Atéfact | Niveau 1 | Niveau 2 | Niveau 3 | ??????? |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| Conque de l'Atlantide | Tir une vague de projectiles qui inflige 1 point de dégâts dans un couloir de 1 de large | Tir une vague de projectiles qui inflige 1 point de dégâts dans un couloir de 3 de large | Tir une vague de projectiles qui inflige 1 point de dégâts dans un couloir de 5 de large | Tir 4 vague de projectiles dans les 4 directions qui inflige 1 point de dégâts dans des couloirs de 5 de larges |
+| Torche des anciens | Tir 1 cercle de feu qui traverse tout et inflige 1 point de dégât | Tir 2 cercles de feu qui traverse tout et inflige 1 point de dégât | Tir 3 cercles de feu qui traverse tout et inflige 1 point de dégât | Tir 3 cercles de feu qui traverse toute la carte et inflige 1 point de dégât |
+| Coeur de la Terre | Choisissez une case hors de votre champ de vision, y fait tomber un obstacle | Choisissez une zone hors de votre champ de vision, y fait tomber 5 obstacles | Choisissez une zone hors de votre champ de vision, y fait tomber 9 obstacles | Choisissez une zone, y fait tomber 9 obstacles |
+| Pot oublié de Babylon | Passif : Avant chaque première action, fait apparaitre 1 plante sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 2 plante sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 3 plantes sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 5 plantes sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | 

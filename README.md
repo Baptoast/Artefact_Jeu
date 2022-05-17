@@ -64,6 +64,8 @@ Les objets sont divisés en trois catégories : Armes, Utilitaire et Piège.
 | Kit de soin | Utilitaire | Vous rend 1 point de vie |
 | Balise des anciens | Utilitaire | Vous placez une balise dans votre champ de vision qui vous donne la vision de la zone tant qu'elle ne se fait pas écrasée |
 | Cape d'invisibilité | Utilitaire | Vous devenez invisible jusqu'à la prochaine délibération |
+| Pelle perceuse | Utilitaire | Choisissez un obstacle dans votre champ de vision, il est détruit |
+| Hologramme trompeur | Utilitaire | Choisissez une case dans votre champ de vision, fait apparaitre un faux obstacle traversable |
 | Bombe | Piège | Inflige 2 point de dégâts |
 | Fosse cachée | Piège | Inflige 1 point de dégâts, empêche les déplacements suivants |
 | Rocher roulant | Piège | Invoque un rocher qui roule lentement| et pousse les ennemis sur son passage en leurs infligeant 4 point de dégâts. |
@@ -79,4 +81,15 @@ A chaque utilisation, l'artéfact gagne en puissance (après un temps de recharg
 | Conque de l'Atlantide | Tir une vague de projectiles qui inflige 1 point de dégâts dans un couloir de 1 de large | Tir une vague de projectiles qui inflige 1 point de dégâts dans un couloir de 3 de large | Tir une vague de projectiles qui inflige 1 point de dégâts dans un couloir de 5 de large | Tir 4 vague de projectiles dans les 4 directions qui inflige 1 point de dégâts dans des couloirs de 5 de larges |
 | Torche des anciens | Tir 1 cercle de feu qui traverse tout et inflige 1 point de dégât | Tir 2 cercles de feu qui traverse tout et inflige 1 point de dégât | Tir 3 cercles de feu qui traverse tout et inflige 1 point de dégât | Tir 3 cercles de feu qui traverse toute la carte et inflige 1 point de dégât |
 | Coeur de la Terre | Choisissez une case hors de votre champ de vision, y fait tomber un obstacle | Choisissez une zone hors de votre champ de vision, y fait tomber 5 obstacles | Choisissez une zone hors de votre champ de vision, y fait tomber 9 obstacles | Choisissez une zone, y fait tomber 9 obstacles |
-| Pot oublié de Babylon | Passif : Avant chaque première action, fait apparaitre 1 plante sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 2 plante sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 3 plantes sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 5 plantes sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | 
+| Statuette efflorescente | Passif : Avant chaque première action, fait apparaitre 1 plante sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 2 plante sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 3 plantes sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 5 plantes sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | 
+
+###Information supplémentaire :
+
+- Chaque joueur commence avec 4 points de vies.
+- Seul l'objet au premier emplacement d'un joueur n'est pas visible par les autres.
+- Lorsqu'un obstacles tombe sur une case autre qu'un joueur, tout les composants ce situant sur la case reste quand même (ex : piège)
+- Lorsqu'un joueur perd, il voit toute la map, tout les pièges et tout les objets des joueurs (pour de l'équitée, évité de révélé des informations)
+- Chaque fois qu'un fragment d'artéfact apparais, sa position est révélé à tout le monde
+- Il ne peux pas avoir plus de 2 fragments d'artéfact sur le sol en même temps.
+- On peux continuer à récupérer des fragments d'artéfacts même après avoir obtenus un artéfact complété...
+- La bulle de discution par émote ne fonctionne pas pour l'instant.

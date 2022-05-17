@@ -83,7 +83,7 @@ A chaque utilisation, l'artéfact gagne en puissance (après un temps de recharg
 | Coeur de la Terre | Choisissez une case hors de votre champ de vision, y fait tomber un obstacle | Choisissez une zone hors de votre champ de vision, y fait tomber 5 obstacles | Choisissez une zone hors de votre champ de vision, y fait tomber 9 obstacles | Choisissez une zone, y fait tomber 9 obstacles |
 | Statuette efflorescente | Passif : Avant chaque première action, fait apparaitre 1 plante sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 2 plante sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 3 plantes sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | Passif : Avant chaque première action, fait apparaitre 5 plantes sur une des cases de votre champs de vision, au bout de 10 plantes, vous récupérez également 1 point de vie et les autres joueurs subissent 1 point de dégâts au début de leurs premier tour | 
 
-###Information supplémentaire :
+### Information supplémentaire :
 
 - Chaque joueur commence avec 4 points de vies.
 - Seul l'objet au premier emplacement d'un joueur n'est pas visible par les autres.
@@ -92,4 +92,10 @@ A chaque utilisation, l'artéfact gagne en puissance (après un temps de recharg
 - Chaque fois qu'un fragment d'artéfact apparais, sa position est révélé à tout le monde
 - Il ne peux pas avoir plus de 2 fragments d'artéfact sur le sol en même temps.
 - On peux continuer à récupérer des fragments d'artéfacts même après avoir obtenus un artéfact complété...
+- Les joueurs ne peuvent obtenir qu'un artéfact.
+- Les artéfacts ne peuvent pas être détruit ou volé.
+- Chaque artéfact ne peut être obtenus qu'une seule fois par partie.
+- Lorsqu'un joueur perd, son artéfact n'est pas ré-obtenable par les autres joueurs.
 - La bulle de discution par émote ne fonctionne pas pour l'instant.
+- Lorsqu'un objet est volé/perdu avant d'être utilisé, l'utilisation est annulée.
+- Les projectiles ce déplacent avant chaque action du joueur qui les a lancés.

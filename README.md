@@ -59,11 +59,11 @@ Les objets sont divisés en trois catégories : Armes, Utilitaire et Piège.
 | Maillet de l'empereur | Arme | Vous infligez 2 points de dégâts sur deux case proche de vous et repousser les joueurs touchés de 1 cases |
 | Sombre faux | Arme | Vous infliger 2 point de dégâts tout autour de vous |
 | Pistolet rouillé | Arme | Vous tirez un projectile qui inflige 2 points de dégâts |
-| Bombe flash | Arme | Selectionnez une zone hors de votre champ de vision, les joueurs qui ce trouve dans cette zone subisse 1 point de dégâts, la zone est révélé jusqu'à la prochaine délibération |
+| Bombe flash | Arme | Selectionnez une zone hors de votre champ de vision, les joueurs qui ce trouve dans cette zone subisse 1 point de dégâts, la zone est révélé jusqu'à la prochaine résolution |
 | Sondeur tek-tonique | Armes | Lance une onde de choc qui inflige 1 point de dégâts dans un couloir de 3 de large qui traverse tout |
 | Kit de soin | Utilitaire | Vous rend 1 point de vie |
 | Balise des anciens | Utilitaire | Vous placez une balise dans votre champ de vision qui vous donne la vision de la zone tant qu'elle ne se fait pas écrasée |
-| Cape d'invisibilité | Utilitaire | Vous devenez invisible jusqu'à la prochaine délibération |
+| Cape d'invisibilité | Utilitaire | Vous devenez invisible jusqu'à la prochaine résolution |
 | Pelle perceuse | Utilitaire | Choisissez un obstacle dans votre champ de vision, il est détruit |
 | Hologramme trompeur | Utilitaire | Choisissez une case dans votre champ de vision, fait apparaitre un faux obstacle traversable |
 | Bombe | Piège | Inflige 2 point de dégâts |

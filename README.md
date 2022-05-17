@@ -66,9 +66,10 @@ Les objets sont divisés en trois catégories : Armes, Utilitaire et Piège.
 | Cape d'invisibilité | Utilitaire | Vous devenez invisible jusqu'à la prochaine résolution |
 | Pelle perceuse | Utilitaire | Choisissez un obstacle dans votre champ de vision, il est détruit |
 | Hologramme trompeur | Utilitaire | Choisissez une case dans votre champ de vision, fait apparaitre un faux obstacle traversable |
-| Bombe | Piège | Inflige 2 point de dégâts |
+| Bombe piège | Piège | Inflige 2 point de dégâts |
 | Fosse cachée | Piège | Inflige 1 point de dégâts, empêche les déplacements suivants |
 | Rocher roulant | Piège | Invoque un rocher qui roule lentement| et pousse les ennemis sur son passage en leurs infligeant 4 point de dégâts. |
+| Piège-à-rat | Piège | Invoque 2 rats dans le champ de vision ayant chacun 1 point de vie et infligeant 1 point de dégâts au corps à corps |
 
 ### Les artéfacts
 

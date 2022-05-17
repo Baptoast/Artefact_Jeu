@@ -22,7 +22,7 @@ Chaque tour ce déroule en plusieurs phase, la phase **actions** et la phase **r
 
 Vous avez le choix d'effectuer deux actions parmis quatre proposés : **Se déplacer**, **Fouiller**, **Utiliser un objet** ou **Déclencher un éboulement**
 
-- **Se déplacer** : Permet à votre personnage de ce déplacer de 0 à 3 cases, vous selectionner les cases une par une, et une fois le choix effectué, un clone bleuté de votre personnage vous indique la futur position qu'aura (probablement) votre personnage lors de la résolution de cette action.
+- **Se déplacer** : Permet à votre personnage de ce déplacer de 0 à 3 cases, vous selectionnez les cases une par une, et une fois le choix effectué, un clone bleuté de votre personnage vous indique la futur position qu'aura (probablement) votre personnage lors de la résolution de cette action.
 
 - **Fouiller** : Permet à votre personnage de récupérer un objet ou de récupéré un fragment d'artéfact si celui-çi ce trouve sur votre case.
 

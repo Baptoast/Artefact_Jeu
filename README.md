@@ -1,4 +1,4 @@
-#/!\ Jeu en cours de développement /!\
+# /!\ Jeu en cours de développement, pas encore opérationnel /!\
 # Artefact_Jeu
 ## But du jeu : 
 Faire tomber les points de vie de vos adversaires à 0

@@ -92,7 +92,7 @@ A chaque utilisation, l'artéfact gagne en puissance (après un temps de recharg
 - Lorsqu'un obstacles tombe sur une case autre qu'un joueur, tout les composants ce situant sur la case reste quand même (ex : piège)
 - Lorsqu'un joueur perd, il voit toute la map, tout les pièges et tout les objets des joueurs (pour de l'équitée, évité de révélé des informations)
 - Chaque fois qu'un fragment d'artéfact apparais, sa position est révélé à tout le monde
-- Il ne peux pas avoir plus de 2 fragments d'artéfact sur le sol en même temps.
+- Il ne peux pas avoir plus de 1 fragment d'artéfact sur le sol en même temps.
 - On peux continuer à récupérer des fragments d'artéfacts même après avoir obtenus un artéfact complété...
 - Les joueurs ne peuvent obtenir qu'un artéfact.
 - Les artéfacts ne peuvent pas être détruit ou volé.

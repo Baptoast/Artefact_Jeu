@@ -58,11 +58,9 @@ void Menu::loadTextureMenu() {
 		//Je charge la texture
 		sprite_portrait_Jon.setTexture(texture_portrait_Jon);
 		sprite_portrait_Jon.setPosition(SCREEN_SIZE_WEIGHT/8-30, 60);
-		sprite_portrait_Jon.setScale(Vector2f(2.5, 2.5));
 
 		sprite_portrait_Helene.setTexture(texture_portrait_Helene);
 		sprite_portrait_Helene.setPosition((SCREEN_SIZE_WEIGHT / 8)*3-30, 60);
-		sprite_portrait_Helene.setScale(Vector2f(2.5, 2.5));
 	}
 	if (!texture_pasPret.loadFromFile("res/img/pasPret.png") || !texture_Pret.loadFromFile("res/img/pret.png")) {
 		cout << "erreur de chargement du personnage" << endl;
@@ -83,7 +81,6 @@ bool Menu::isOpen() {
 int Menu::connexionAuServeur() {
 	status = socket.connect("192.168.1.27", 53000);
 	while (status != Socket::Done) {}
-
 	while (window.isOpen()) {
 		char data[100];
 		std::size_t received;
@@ -94,6 +91,7 @@ int Menu::connexionAuServeur() {
 		//Reçoit
 		if (socket.receive(data, 100, received) != Socket::Done) {}
 		nbrDeJoueurCo = (int)data[0] - 48;
+		
 		for (int k = 0; k < nbrDeJoueurCo; k++) {
 			if (data[k+1] == '1') {
 				portraitJoueurs.at(k).setTexture(texture_portrait_Jon);
@@ -224,7 +222,6 @@ void Menu::bouclePrincipale() {
 			window.draw(joueurPret.at(0));
 
 			portraitJoueurs.at(0).setPosition(SCREEN_SIZE_WEIGHT / 8 + 60, SCREEN_SIZE_HEIGHT / 2 - 140);
-			portraitJoueurs.at(0).setScale(Vector2f(2, 2));
 			window.draw(portraitJoueurs.at(0));
 		}
 	}
@@ -242,7 +239,6 @@ void Menu::bouclePrincipale() {
 			window.draw(joueurPret.at(1));
 
 			portraitJoueurs.at(1).setPosition((SCREEN_SIZE_WEIGHT / 8) * 4 + 60, SCREEN_SIZE_HEIGHT / 2 - 140);
-			portraitJoueurs.at(1).setScale(Vector2f(2, 2));
 			window.draw(portraitJoueurs.at(1));
 		}
 	}
@@ -261,7 +257,6 @@ void Menu::bouclePrincipale() {
 			window.draw(joueurPret.at(2));
 
 			portraitJoueurs.at(2).setPosition(SCREEN_SIZE_WEIGHT / 8 + 60, SCREEN_SIZE_HEIGHT / 2 - 140 + 200);
-			portraitJoueurs.at(2).setScale(Vector2f(2, 2));
 			window.draw(portraitJoueurs.at(2));
 		}
 	}
@@ -280,7 +275,6 @@ void Menu::bouclePrincipale() {
 			window.draw(joueurPret.at(3));
 
 			portraitJoueurs.at(3).setPosition((SCREEN_SIZE_WEIGHT / 8) * 4 + 60, SCREEN_SIZE_HEIGHT / 2 - 140 + 200);
-			portraitJoueurs.at(3).setScale(Vector2f(2, 2));
 			window.draw(portraitJoueurs.at(3));
 		}
 	}

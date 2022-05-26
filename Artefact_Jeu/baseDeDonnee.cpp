@@ -7,7 +7,7 @@ BaseDeDonnee::BaseDeDonnee() {
 
 void BaseDeDonnee::ajoutJoueur(Perso& perso, String personnageChoisi) {
 	leJoueur.push_back(perso);
-	leJoueur.at(0).loadTexturePerso();
+	leJoueur.at(0).loadTexturePerso(1);
 	leJoueur.at(0).loadTexturePersoPortrait(personnageChoisi);
 	srand(time(NULL));
 }
@@ -35,24 +35,12 @@ void BaseDeDonnee::ajoutAdversaires(Adversaire& adv1, Adversaire& adv2, Adversai
 }
 
 void BaseDeDonnee::affichageChosesDansVision(RenderWindow& window) {
-	if (leJoueur.at(0).listeCase.size() >= 4) {
-		if (leJoueur.at(0).listeCase.size() == 7) {
-			leJoueur.at(0).sprite_perso_clone.setPosition(leJoueur.at(0).listeCase.at(leJoueur.at(0).listeCase.size() - 1).posX, leJoueur.at(0).listeCase.at(leJoueur.at(0).listeCase.size() - 1).posY);
-		}
-		else {
-			leJoueur.at(0).sprite_perso_clone.setPosition(leJoueur.at(0).listeCase.at(3).posX, leJoueur.at(0).listeCase.at(3).posY);
-		}
-		leJoueur.at(0).cloneActif = true;
-		leJoueur.at(0).affichePerso(window,true);
-	}
-	else {
-		leJoueur.at(0).cloneActif = false;
-		leJoueur.at(0).affichePerso(window,false);
-	}
+	
+	leJoueur.at(0).affichePerso(window);
 
 	for (int i = 0; i < listeAdversaire.size(); i++)
 	{
-		cout << listeAdversaire.at(i).sprite_adversaire.getPosition().x << endl;
+		//cout << listeAdversaire.at(i).sprite_adversaire.getPosition().x << endl;
 		if (dansChampDeVision(listeAdversaire.at(i).posAdversaire.posX, listeAdversaire.at(i).posAdversaire.posY)) {
 			listeAdversaire.at(i).afficheAdversaire(window);
 		}
@@ -141,6 +129,7 @@ void BaseDeDonnee::melangeOrdreDePassage() {
 	listeAdversaire.at(2).numeroDeFile = urne.at(0);
 }
 
+/*
 void BaseDeDonnee::resolutionActions(Objet& objets, Hud& hud, RenderWindow& window) {
 	for (int i = 0; i < 4; i++)
 	{
@@ -191,4 +180,4 @@ void BaseDeDonnee::resolutionActions(Objet& objets, Hud& hud, RenderWindow& wind
 	for (int u = 0; u < 3; u++) {
 		listeAdversaire.at(u).choixDeSesActions();
 	}
-}
+}*/

@@ -40,6 +40,9 @@ public:
 	int numeroIndicateurObjetUtilisation(int num);
 	void effetObjet(int num, vector<Perso>& leJoueur, int caseX, int caseY);
 
+	string utilisationObjet(int num, vector<Perso>& leJoueur, int caseX, int caseY);
+	char convertisseurCoordonneesVersLettres(int nombre);
+
 
 
 	//attribut private

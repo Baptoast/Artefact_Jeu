@@ -4,6 +4,7 @@
 //include
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 #include "input.h"
 
 
@@ -14,12 +15,15 @@ using namespace std;
 class Perso {
 
 	//structure utilisée dans Perso.cpp
-	struct Pos { int posX, posY; };
+	struct Pos { float posX, posY; };
 
-	Texture texture_perso;
+	
 	Texture texture_perso_clone;
 	Texture texture_vision;
 	Texture texture_portrait;
+
+	Clock timeAnimationPerso;
+	bool animationEnCours;
 	
 	//Liste des directions où peut regarder notre personnage
 	enum Dir { Down, Left, Right, Up };
@@ -27,6 +31,9 @@ class Perso {
 	Vector2i anim;
 
 public:
+	int directionMarche = 3;
+	vector<Texture> texture_perso;
+
 	int pv;
 
 	struct Case { int posX, posY; };
@@ -56,12 +63,13 @@ public:
 	Sprite getSprite();
 
 	//fontion
-	void loadTexturePerso();
+	void loadTexturePerso(int numPerso);
 	float anglePoints(int x1, int y1, int x2, int y2);
 	float anglePointsDegree(int x1, int y1, int x2, int y2);
 	void loadTexturePersoPortrait(String personnageChoisi);
 
-	void affichePerso(RenderWindow& window, bool afficheClone);
+	void affichePerso(RenderWindow& window);
+	void animationPerso(int y);
 
 
 

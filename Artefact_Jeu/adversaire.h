@@ -15,8 +15,6 @@ class Adversaire {
 
 	//structure utilisée dans Perso.cpp
 	struct Pos { int posX, posY; };
-
-	Texture texture_adversaire;
 	
 	Texture texture_portrait;
 	
@@ -27,6 +25,8 @@ class Adversaire {
 	Vector2i anim;
 
 public:
+	vector<Texture> texture_adversaire;
+
 	int pv;
 	Sprite sprite_portrait;
 	Sprite sprite_adversaire;

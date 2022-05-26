@@ -29,8 +29,8 @@ public:
 
 	//Proto du contructeur
 	Indicateur();
-	void afficheIndicateur(RenderWindow& window, vector<int>& listeMurCaseX, vector<int>& listeMurCaseY);
-	void updateIndicateur(int numType, int posJoueurX, int posJoueurY);
+	void afficheIndicateur(RenderWindow& window);
+	void updateIndicateur(int numType, int posJoueurX, int posJoueurY, vector<int>& listeMurCaseX, vector<int>& listeMurCaseY);
 	void loadTextureIndicateur();
 	bool casePossible(RenderWindow& window);
 

@@ -59,6 +59,7 @@ void Jeu::connexionAuServeur(int ticket) {
     if (socket.receive(data, 100, received) != Socket::Done) {}
 
     bdd.leJoueur.at(0).numPerso = (int)data[0] - 48;
+    bdd.leJoueur.at(0).sprite_perso.setTexture(bdd.leJoueur.at(0).texture_perso.at(bdd.leJoueur.at(0).numPerso-1));
     bdd.updateJoueur(convertisseurCoordonnees(data[1])*64, convertisseurCoordonnees(data[2])*64);
     bdd.leJoueur.at(0).numeroDeFile = (int)data[3] - 48;
     
@@ -79,7 +80,7 @@ void Jeu::bouclePrincipale() {
     sol.afficheSol(window);
     bdd.affichageChosesDansVision(window);
     salle.afficheSalle(window);
-    indicateur.afficheIndicateur(window,salle.posXmurs,salle.posYmurs);
+    indicateur.afficheIndicateur(window);
     hud.afficheHud(window, objets, bdd.leJoueur, bdd.listeAdversaire);
 
     window.setView(vue);
@@ -89,6 +90,7 @@ void Jeu::bouclePrincipale() {
     
 }
 
+/*
 void Jeu::deroulementTour() {
     char data[100];
     std::size_t received;
@@ -274,8 +276,213 @@ void Jeu::deroulementTour() {
             
     }
 }
+*/
 
+void Jeu::deroulementTour() {
+    char data[100];
+    char dataAenvoyer[100];
+    std::size_t received;
+    if (socket.receive(data, 100, received) != Socket::Done) {}
+    sprintf_s(data, "");
+    sprintf_s(dataAenvoyer, "");
 
+    while (window.isOpen()) {
+        int positionSourisX = laSouris.getPosition().x - window.getPosition().x;
+        int positionSourisY = laSouris.getPosition().y - window.getPosition().y;
+
+        hud.hud_Actif = true;
+        if (hud.actionDeplacement) {
+            if (confirmation && !hud.confirmationChoix) {
+                //ICI ON PASSE EN ATTENTE
+                cout << "une action confirmee" << endl;
+                initialisationPremiereCase = false;
+                attenteCaseSuivante = false;
+                confirmation = false;
+                hud.actionDeplacement = false;
+
+                //bdd.leJoueur.at(0).choix = 2;
+                //Partie transfert de l'action
+                sprintf_s(data, "%sD", data);
+                nombreActions += 1;
+                if (nombreActions < 2) {
+                    hud.menuAction = true;
+                }
+            }
+            else if (confirmation && hud.confirmationChoix) {
+                hud.confirmationBouton(window);
+            }
+            else if (!confirmation && !hud.confirmationChoix) {
+                hud.confirmationChoix = true;
+                hud.confirmationBouton(window);
+                confirmation = true;
+            }
+        }
+        if (hud.actionFouille) {
+            if (confirmation && !hud.confirmationChoix) {
+                //ICI ON PASSE EN ATTENTE
+                cout << "une action confirmee" << endl;
+                confirmation = false;
+                hud.actionFouille = false;
+
+                //bdd.leJoueur.at(0).choix = 2;
+                //Partie transfert de l'action
+                sprintf_s(data, "%sF", data);
+                nombreActions += 1;
+                if (nombreActions < 2) {
+                    hud.menuAction = true;
+                }
+            }
+            else if (confirmation && hud.confirmationChoix) {
+                hud.confirmationBouton(window);
+            }
+            else if (!confirmation && !hud.confirmationChoix) {
+                hud.confirmationChoix = true;
+                hud.confirmationBouton(window);
+                confirmation = true;
+            }
+        }
+        if (hud.actionObjets) {
+            if (confirmation && !hud.confirmationChoix) {
+                //ICI ON PASSE EN ATTENTE
+                cout << "une action confirmee" << endl;
+                confirmation = false;
+                hud.actionObjets = false;
+                hud.inventaireGros = false;
+                attenteCaseSuivante = false;
+
+                //bdd.leJoueur.at(0).choix = 2;
+                //Partie transfert de l'action
+                sprintf_s(data, "%sU", data);
+                nombreActions += 1;
+                if (nombreActions < 2) {
+                    hud.menuAction = true;
+                }
+            }
+            else if (confirmation && hud.confirmationChoix) {
+                hud.confirmationBouton(window);
+            }
+            else if (!confirmation && !hud.confirmationChoix) {
+                hud.confirmationChoix = true;
+                hud.confirmationBouton(window);
+                confirmation = true;
+            }
+        }
+        if (hud.actionEboulement) {
+            if (confirmation && !hud.confirmationChoix) {
+                //ICI ON PASSE EN ATTENTE
+                cout << "une action confirmee" << endl;
+                confirmation = false;
+                hud.actionFouille = false;
+
+                //bdd.leJoueur.at(0).choix = 2;
+                //Partie transfert de l'action
+                sprintf_s(data, "%sE", data);
+                nombreActions += 1;
+                if (nombreActions < 2) {
+                    hud.menuAction = true;
+                }
+            }
+            else if (confirmation && hud.confirmationChoix) {
+                hud.confirmationBouton(window);
+            }
+            else if (!confirmation && !hud.confirmationChoix) {
+                hud.confirmationChoix = true;
+                hud.confirmationBouton(window);
+                confirmation = true;
+
+            }
+        }
+
+        //Envoi des donnees
+        if (nombreActions == 2) {
+            cout << "envoie actions" << endl;
+            if (socket.send(data, 100) != Socket::Done) {}
+
+            while (strcmp(data, "Z") != 0) {
+                if (socket.receive(data, 100, received) != Socket::Done) {}
+                cout << "reçoit actions : " << data << endl;
+
+                //Realisation d'une action sois-même
+                if (data[0] == 'A') {
+                    if (data[1] == 'D') {
+                        indicateur.updateIndicateur(1, bdd.leJoueur.at(0).getPos().posX, bdd.leJoueur.at(0).getPos().posY, salle.posXmurs, salle.posYmurs);
+                        while (laSouris.isButtonPressed(laSouris.Left)) {}
+                        while (!laSouris.isButtonPressed(laSouris.Left) || !indicateur.casePossible(window)) {}
+                        positionSourisX = laSouris.getPosition().x - window.getPosition().x;
+                        positionSourisY = laSouris.getPosition().y - window.getPosition().y;
+                        indicateur.updateIndicateur(0, 0, 0, salle.posXmurs, salle.posYmurs);
+                        sprintf_s(dataAenvoyer, "%c%c", convertisseurCoordonneesVersLettres((positionSourisX / 64)), convertisseurCoordonneesVersLettres((positionSourisY / 64)));
+
+                        if (socket.send(dataAenvoyer, 100) != Socket::Done) {}
+                    }
+                    if (data[1] == 'F') {
+                        //Recoit objet, si inventaire non plein ne fait rien à part recevoir
+                        sprintf_s(dataAenvoyer, "Z");
+                        if (socket.send(dataAenvoyer, 100) != Socket::Done) {}
+                    }
+                    if (data[1] == 'U') {
+                        //Selection de l'objet à utiliser
+                        sprintf_s(dataAenvoyer, "Z");
+                        if (socket.send(dataAenvoyer, 100) != Socket::Done) {}
+                    }
+                    if (data[1] == 'E') {
+                        //Selection de l'endroit à eboulementer
+                        sprintf_s(dataAenvoyer, "Z");
+                        if (socket.send(dataAenvoyer, 100) != Socket::Done) {}
+                    }
+                }
+
+                //Action joueurs (ennemis ou le joueur)
+                if (data[0] == 'J') {
+                    //Votre action réalisee + info decouverte si déplacement ou autre
+                    if ((int)data[1] - 48 == numeroJoueur) {
+                        switch (data[2])
+                        {
+                        //Le joueur ce déplace
+                        case 'D': {
+                            //Pour animation
+                            bdd.leJoueur.at(0).directionMarche = (bdd.leJoueur.at(0).getPos().posX) / 64 - convertisseurCoordonnees(data[3]);
+                            if (bdd.leJoueur.at(0).directionMarche == 0) {
+                                bdd.leJoueur.at(0).directionMarche = (bdd.leJoueur.at(0).getPos().posY) / 64 - convertisseurCoordonnees(data[4])+3;
+                            }
+                            clk.restart(); 
+                            while (clk.getElapsedTime().asMilliseconds() < 1250) {}
+                            bdd.leJoueur.at(0).directionMarche = 0;
+
+                            bdd.updateJoueur(convertisseurCoordonnees(data[3]) * 64, convertisseurCoordonnees(data[4]) * 64);
+                            //Vision des obstacles et joueurs (ça peut peter...)
+                            int compte = 0;
+                            while (data[5 + compte] == 'J' || data[5 + compte] == 'O') {
+                                if ((int)data[6 + compte] - 48 != numeroJoueur) {
+                                    bdd.listeAdversaire.at((int)data[6 + compte] - 48 - 1).setPosX(convertisseurCoordonnees(data[7 + compte]) * 64);
+                                    bdd.listeAdversaire.at((int)data[6 + compte] - 48 - 1).setPosY(convertisseurCoordonnees(data[8 + compte]) * 64);
+                                    bdd.listeAdversaire.at((int)data[6 + compte] - 48 - 1).sprite_adversaire.setPosition((convertisseurCoordonnees(data[7 + compte]) * 64), (convertisseurCoordonnees(data[8 + compte]) * 64));
+                                };
+                                compte += 3;
+                            }
+                            break;
+                        }
+                                //Le joueur fouille
+                        case 'F': {
+                            objets.gainObjet(convertisseurIdObjets(data[3], data[4]));
+                            break;
+                        }
+                        }
+                    }
+                    //Actions des adversaires
+                    else {
+                        int numeroDeLadversaire = (int)data[1] - 48;
+
+                    }
+
+                }
+            }
+            bdd.leJoueur.at(0).listeCase.clear();
+            nombreActions = 0;
+            hud.menuAction = true;
+        }
+    }
+}
 
 int Jeu::convertisseurCoordonnees(char lettre) {
     switch (lettre) {
@@ -320,8 +527,8 @@ char Jeu::convertisseurCoordonneesVersLettres(int nombre) {
 }
 
 int Jeu::convertisseurIdObjets(char chiffre1, char chiffre2) {
-    cout << chiffre1 << (int)chiffre1 << endl;
-    cout << chiffre2 << (int)chiffre2 << endl;
-    cout << (((int)chiffre1 - 48) * 10) + ((int)chiffre2 - 48) << endl;
+    //cout << chiffre1 << (int)chiffre1 << endl;
+    //cout << chiffre2 << (int)chiffre2 << endl;
+    //cout << (((int)chiffre1 - 48) * 10) + ((int)chiffre2 - 48) << endl;
     return (((int)chiffre1 - 48) * 10) + ((int)chiffre2 - 48);
 }

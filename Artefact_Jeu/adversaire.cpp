@@ -29,12 +29,21 @@ void Adversaire::setPosY(int y)
 }
 
 void Adversaire::loadTextureAdversaire() {
-	if (!texture_adversaire.loadFromFile("res/img/helene.png")) {
+	Texture text_jon;
+	Texture text_helene;
+	Texture text_mickael;
+	Texture text_teneia;
+	texture_adversaire.push_back(text_jon);
+	texture_adversaire.push_back(text_helene);
+	texture_adversaire.push_back(text_mickael);
+	texture_adversaire.push_back(text_teneia);
+
+	if (!texture_adversaire.at(0).loadFromFile("res/img/portrait/Jon_sprite.png") || !texture_adversaire.at(1).loadFromFile("res/img/portrait/Helene_sprite.png") || !texture_adversaire.at(2).loadFromFile("res/img/portrait/Mickael_sprite.png") || !texture_adversaire.at(3).loadFromFile("res/img/portrait/Teneia_sprite.png")) {
 		cout << "erreur de chargement du personnage" << endl;
 	}
 	else {
 		//Je charge la texture
-		sprite_adversaire.setTexture(texture_adversaire);
+		sprite_adversaire.setTexture(texture_adversaire.at(0));
 	}
 };
 
@@ -50,7 +59,9 @@ void Adversaire::loadTextureAdversairePortrait(String personnageChoisi) {
 
 void Adversaire::afficheAdversaire(RenderWindow& window) {
 
-	sprite_adversaire.setTextureRect(IntRect(0, 0, 64, 64));
+	sprite_adversaire.setTextureRect(IntRect(0, 0, 48, 48));
+
+	sprite_adversaire.setPosition(posAdversaire.posX + 8, posAdversaire.posY + 8);
 
 	window.draw(sprite_adversaire);
 

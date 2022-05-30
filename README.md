@@ -108,4 +108,8 @@ A chaque utilisation, l'artéfact gagne en puissance (après un temps de recharg
 - La bulle de discution par émote ne fonctionne pas pour l'instant.
 - Lorsqu'un objet est volé/perdu avant d'être utilisé, l'utilisation est annulée.
 - Les projectiles ce déplacent avant chaque action du joueur qui les a lancés.
-- Lorsque vous éliminer un joueur, vous gagner un fragment d'artéfact
+- Lorsque vous éliminer un joueur, vous gagner un fragment d'artéfact.
+- Les pièges s'activent uniquement lorsqu'un joueur ce déplace dessus.
+- Les pièges se posent dans n'importe quelle case de votre champ de vision.
+- Si un piège est posé dans le champ de vision d'un adversaire, celui-çi est également informé.
+- Les pièges peuvent être déclenchés par leurs propriétaire.

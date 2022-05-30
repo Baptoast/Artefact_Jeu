@@ -48,7 +48,7 @@ Chaque personnage possède un passif et un objet unique qui évolue à chaque fo
 | Jon | Vos actions de **Fouille** vous laisse chosir un objet parmi deux objets proposés |
 | Hélène | Vous pouvez **utiliser** les armes à distance deux fois |
 | Mickael | Vos actions **déplacement** s'effectue sur une distance entre 0 et 5 cases |
-| Ten'eia | Lors du début du jeu, deux balises qui révèle les cases alentours apparaisse aléatoirement sur la carte, le fragment à terre lors d'un **éboulement** vous donne également de la vision |
+| Ten'eia | Lors du début du jeu, deux balises qui révèle les cases alentours apparaissent aléatoirement sur la carte, le fragment à terre lors d'un **éboulement** vous donne également de la vision |
 
 | Personnage | Objet | Niveau 1 | Niveau 2 | Niveau 3 |
 | ----------- | ----------- | ----------- | ----------- | ----------- |

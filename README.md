@@ -23,13 +23,13 @@ Chaque tour ce déroule en plusieurs phase, la phase **actions** et la phase **r
 
 Vous avez le choix d'effectuer deux actions parmis quatre proposés : **Se déplacer**, **Fouiller**, **Utiliser un objet** ou **Déclencher un éboulement**
 
-- **Se déplacer** : Permet à votre personnage de ce déplacer de 0 à 3 cases, vous selectionnez les cases une par une, et une fois le choix effectué, un clone bleuté de votre personnage vous indique la futur position qu'aura (probablement) votre personnage lors de la résolution de cette action.
+- **Se déplacer** : Permet à votre personnage de ce déplacer de 0 à 3 cases, vous selectionnez les cases une par une.
 
 - **Fouiller** : Permet à votre personnage de récupérer un objet ou de récupéré un fragment d'artéfact si celui-çi ce trouve sur votre case.
 
 - **Utiliser un objet** : Permet à votre personnage d'utiliser un objet de son inventaire (Arme, Utilitaire ou Piège), la description de l'objet vous renseigne sur sa catégorie et son utilité.
 
-- **Déclencher un éboulement** : Vous permet de choisir une large zone dans laquelle un fragment tombera à coup sûr (aléatoirement), faire cette action aura cependant un risque de faire tomber des obstacles du plafond qui bloquerons le passage, si l'un d'entre eux tombe sur un joueur, celui-çi perd un point de vie.
+- **Déclencher un éboulement** : Vous permet de choisir une large zone dans laquelle un fragment tombera (aléatoirement parmi les cases), faire cette action aura cependant un risque de faire tomber des obstacles du plafond qui bloquerons le passage, si l'un d'entre eux tombe sur un joueur, celui-çi perd un point de vie.
 
 Une fois deux actions parmis celle-ci dessus choisies (peut être deux fois les mêmes), et que tout les autres joueurs ont choisis également leurs actions, la phase de résolution commence.
 
@@ -41,7 +41,14 @@ Une fois la phase de résolution finie, la phase du choix des actions recommence
 
 ### Les personnages
 
-Chaque personnage possède un objet unique qui évolue à chaque fois qu'un adversaire perd tout ses points de vies.
+Chaque personnage possède un passif et un objet unique qui évolue à chaque fois qu'un adversaire perd tout ses points de vies.
+
+| Personnage | Passif |
+| ----------- | ----------- |
+| Jon | Vos actions de **Fouille** vous laisse chosir un objet parmi deux objets proposés |
+| Hélène | Vous pouvez **utiliser** les armes à distance deux fois |
+| Mickael | Vos actions **déplacement** s'effectue sur une distance entre 0 et 5 cases |
+| Ten'eia | Lors du début du jeu, deux balises qui révèle les cases alentours apparaisse aléatoirement sur la carte, le fragment à terre lors d'un **éboulement** vous donne également de la vision |
 
 | Personnage | Objet | Niveau 1 | Niveau 2 | Niveau 3 |
 | ----------- | ----------- | ----------- | ----------- | ----------- |

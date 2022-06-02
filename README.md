@@ -55,7 +55,7 @@ Chaque personnage possède un passif et un objet unique qui évolue à chaque fo
 | Jon | Loupe | Copie l'effet d'un de vos objets | Détruit un de vos objets pour obtenir 2 fragments d'artéfacts | Vous obtenez un trésor |
 | Hélène | Fusil de rechange | Tir 1 projectile qui inflige 2 points de dégâts | Tir 3 projectiles lents qui inflige chacun 2 points de dégâts | Invoque un fusil qui tire des salves de projectiles lents dans un couloir de 3 de largeurs jusqu'à la fin du jeu |
 | Mickael | Epée de rechange | Inflige 4 point de dégâts à un adversaire au corp à corp | Piège : inflige 4 point de dégâts | Passif : Vous infligez 1 point de dégâts à chaque personnage qui effectue des actions proche de vous |
-| Jacqueline | Montre à gousset | Vous ne pouvez pas subir de dégâts jusqu'à la prochaine résolution | Modifiez l'ordre de résolution du prochain tour comme vous le souhaitez | Fait apparaitre des failles temporelles sur toute la carte |
+| Jacqueline | Montre à gousset | Vousdevenez invisible et ne pouvez pas subir de dégâts jusqu'à la prochaine résolution | Modifiez l'ordre de résolution du prochain tour comme vous le souhaitez | Fait apparaitre des failles temporelles sur toute la carte |
 
 ### Les objets
 

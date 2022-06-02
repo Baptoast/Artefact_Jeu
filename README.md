@@ -48,14 +48,14 @@ Chaque personnage possède un passif et un objet unique qui évolue à chaque fo
 | Jon | Vos actions de **Fouille** vous laisse chosir un objet parmi deux objets proposés |
 | Hélène | Vous pouvez **utiliser** les armes à distance deux fois |
 | Mickael | Vos actions **déplacement** s'effectue sur une distance entre 0 et 5 cases |
-| Ten'eia | Lors du début du jeu, deux balises qui révèle les cases alentours apparaissent aléatoirement sur la carte, le fragment à terre lors d'un **éboulement** vous donne également de la vision |
+| Jacqueline | Au début de chacun de vos premiers tours, si aucune faille temporelle existe en crée une dans votre champ de vision, lorsque vous **fouillez** à cet emplacement vous devenez invisible jusqu'à la prochaine résolution (consomme la faille temporelle) |
 
 | Personnage | Objet | Niveau 1 | Niveau 2 | Niveau 3 |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | Jon | Loupe | Copie l'effet d'un de vos objets | Détruit un de vos objets pour obtenir 2 fragments d'artéfacts | Vous obtenez un trésor |
 | Hélène | Fusil de rechange | Tir 1 projectile qui inflige 2 points de dégâts | Tir 3 projectiles lents qui inflige chacun 2 points de dégâts | Invoque un fusil qui tire des salves de projectiles lents dans un couloir de 3 de largeurs jusqu'à la fin du jeu |
 | Mickael | Epée de rechange | Inflige 4 point de dégâts à un adversaire au corp à corp | Piège : inflige 4 point de dégâts | Passif : Vous infligez 1 point de dégâts à chaque personnage qui effectue des actions proche de vous |
-| Ten'eia | Livre de sort | Vous rend 2 points de vie | Invoque un monstre avec 3 points de vie qui inflige 1 point de dégât au corp à corp qui ne vous attaque pas | Vous vous divisez en 2 copies, qui partage leurs objets en commun, chaque copie récupère la moitié de la vie original |
+| Jacqueline | Montre à gousset | Vous ne pouvez pas subir de dégâts jusqu'à la prochaine résolution | Modifiez l'ordre de résolution du prochain tour comme vous le souhaitez | Fait apparaitre des failles temporelles sur toute la carte |
 
 ### Les objets
 

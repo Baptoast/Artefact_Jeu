@@ -124,6 +124,9 @@ Trouvez un trésor ? C'est facile pour eux, ce qui l'es moins c'est d'être celu
 Et quoi de mieux pour avoir le monopole sur cette caverne que d'éliminer ses confrères.
 
 **Jon** : Explorateur par défaut mais en efficace, il à toujours été le plus rapide pour ramasser les objets précieux en tout genre, il a des lunettes stylés aussi.
+
 **Hélène** : Aventurière téméraire et déterminée, elle ne ce sépare jamais de son bon vieux fusil qui met souvent tout le monde d'accord sur la répartition des richesses.
+
 **Mickael** : Fanfaron et très doué au combat, cet épéiste hors-pair à obtenus une richesse colossal après avoir récupéré les trésors de multiple explorateur malchanceux de le croiser.
+
 **Jacqueline** : Expérimentée, courageuse mais malheureusement toujours en retard, elle à passée sa vie à crée des brèches temporelles avec sa montre pour récupérer les artéfacts qui ce sont fait prendre quelques heures plus tôt, en somme il existe aujourd'hui tout un tas de doublon qui aurais dû être unique. 

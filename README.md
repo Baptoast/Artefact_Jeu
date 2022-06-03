@@ -115,3 +115,15 @@ A chaque utilisation, l'artéfact gagne en puissance (après un temps de recharg
 - Les pièges se posent dans n'importe quelle case de votre champ de vision.
 - Si un piège est posé dans le champ de vision d'un adversaire, celui-çi est également informé.
 - Les pièges peuvent être déclenchés par leurs propriétaire.
+
+### Un peu de lore
+
+Nos quatres explorateurs sont des aventuriers avides de trésors et plus particulièrement d'artéfacts antiques qui valent une fortune.
+Récemment la découverte de la légendaire caverne aux mille et un trésor à fait beaucoup parler d'elle et nos aventuriers furent les premier à y arriver.
+Trouvez un trésor ? C'est facile pour eux, ce qui l'es moins c'est d'être celui qui en récupère le plus avant les autres.
+Et quoi de mieux pour avoir le monopole sur cette caverne que d'éliminer ses confrères.
+
+**Jon** : Explorateur par défaut mais en efficace, il à toujours été le plus rapide pour ramasser les objets précieux en tout genre, il a des lunettes stylés aussi.
+**Hélène** : Aventurière téméraire et déterminée, elle ne ce sépare jamais de son bon vieux fusil qui met souvent tout le monde d'accord sur la répartition des richesses.
+**Mickael** : Fanfaron et très doué au combat, cet épéiste hors-pair à obtenus une richesse colossal après avoir récupéré les trésors de multiple explorateur malchanceux de le croiser.
+**Jacqueline** : Expérimentée, courageuse mais malheureusement toujours en retard, elle à passée sa vie à crée des brèches temporelles avec sa montre pour récupérer les artéfacts qui ce sont fait prendre quelques heures plus tôt, en somme il existe aujourd'hui tout un tas de doublon qui aurais dû être unique. 

@@ -120,7 +120,7 @@ A chaque utilisation, l'artéfact gagne en puissance (après un temps de recharg
 
 Nos quatres explorateurs sont des aventuriers avides de trésors et plus particulièrement d'artéfacts antiques qui valent une fortune.
 Récemment la découverte de la légendaire caverne aux mille-et-un trésors à fait beaucoup parler d'elle et nos aventuriers furent les premier à y arriver.
-Trouvez un trésor ? C'est facile pour eux, ce qui l'es moins c'est d'être celui qui en récupère le plus avant les autres.
+Trouvez un trésor ? C'est facile pour eux, ce qui l'est moins c'est d'être celui qui en récupère le plus avant les autres.
 Et quoi de mieux pour avoir le monopole sur cette caverne que d'éliminer ses confrères.
 
 **Jon** : Explorateur par défaut mais en efficace, il a toujours été le plus rapide pour ramasser les objets précieux en tout genre, il a des lunettes stylés aussi.

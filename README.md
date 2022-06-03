@@ -116,7 +116,7 @@ A chaque utilisation, l'artéfact gagne en puissance (après un temps de recharg
 - Si un piège est posé dans le champ de vision d'un adversaire, celui-çi est également informé.
 - Les pièges peuvent être déclenchés par leurs propriétaire.
 
-### Un peu de lore
+### Un peu de lore 🗺️
 
 Nos quatres explorateurs sont des aventuriers avides de trésors et plus particulièrement d'artéfacts antiques qui valent une fortune.
 Récemment la découverte de la légendaire caverne aux mille-et-un trésors à fait beaucoup parler d'elle et nos aventuriers furent les premier à y arriver.

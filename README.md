@@ -48,7 +48,7 @@ Chaque personnage possède un passif et un objet unique qui évolue à chaque fo
 | Jon | Vos actions de **Fouille** vous laisse chosir un objet parmi deux objets proposés |
 | Hélène | Vous pouvez **utiliser** les armes à distance deux fois |
 | Mickael | Vos actions **déplacement** s'effectue sur une distance entre 0 et 5 cases |
-| Jacqueline | Au début de chacun de vos premiers tours, si aucune faille temporelle existe en crée une dans votre champ de vision, lorsque vous **fouillez** à cet emplacement vous devenez **évasif** jusqu'à votre prochaine première action (consomme la faille temporelle) |
+| Jacqueline | Au début de chacun de vos premiers tours, si aucune faille temporelle existe en crée une dans votre champ de vision, lorsque vous **fouillez** à cet emplacement vous récupérez votre dernier objet utilisé et devenez **évasif** jusqu'à votre prochaine première action (consomme la faille temporelle) |
 
 **évasif** : Vous devenez invisible, ne pouvez pas subir de dégâts, ne déclenchez pas les pièges et pouvez traverser les obstacles ainsi que les projectiles.
 
